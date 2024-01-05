@@ -1088,9 +1088,10 @@ import math
 fun = lambda x : 1 if x == 1 else math.ceil(math.sinh(fun (x-1)))
 print(fun(5))
 '''
-import requests
 
 '''
+import requests
+
 payload = {'key1': 'value1', 'key2': 'value2'}
 r = requests.get('https://httpbin.org/get', params=payload)
 '''
@@ -1267,9 +1268,6 @@ with open('example.csv', "a") as f:
     for student in students:
         writter.writerow(student)
 '''
-
-
-
 
 
 
