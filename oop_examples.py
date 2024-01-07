@@ -67,6 +67,7 @@ print(getattr(id_1, 'work'))
 print(getattr(id_1, 'study'))
 '''
 
+'''
 class Pockemon:
     pass
 pockemons = Pockemon()
@@ -77,4 +78,57 @@ for pock in pocks:
 pocks_for_check = ['lapras', 'pikachu', 'alakazam']
 for pock in pocks_for_check:
     print(hasattr(pockemons, pock))
+'''
 
+'''
+# ваш код:
+class Person:
+    setup = ['set_name', 'set_age', 'set_work', 'set_study']
+id_1 = Person()
+for i in range(len(id_1.setup)):
+    setattr(id_1, id_1.setup[i], input(f"введите {id_1.setup[i][4:]} "))
+
+# код ниже пожалуйста не удаляйте:
+for value in id_1.setup:
+    print(getattr(id_1, value))
+'''
+
+
+'''
+import random
+lucky = [random.randint(0, 29), random.randint(0, 29), random.randint(0, 29)]
+magic_ing = ["Черные коты", "Лягушачьи глаза", "Паутина", "Корень мандрагоры",
+             "Жабий язык", "Женский волос", "Крысы", "Любовное зелье", "Кровь дракона",
+             "Пепел отрока","Чертополох", "Пыльца беладонны", "Черная свеча",
+             "Сердце ворона", "Собачий клык", "Масло лунного света", "Костыли ведьмы",
+             "Подземный гриб","Крыло летучей мыши","Ядовитый плющ", "Перо ворона",
+             "Камень чародея", "Слезы совы","Горсть звездной пыли","Волшебный кристалл",
+             "Костер из драконьих костей","Зелье бессмертия","Черная роза",
+             "Древний свиток заклинаний", "Ключ от врат ада"]
+
+# ниже ваш код:
+class Magic:
+    pass
+
+setattr(Magic, 'ingredients', [magic_ing[i] for i in lucky]) #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+my_coctail = Magic()
+for i in range(len(my_coctail.ingredients)):
+    print(getattr(my_coctail, 'ingredients')[i])
+print("Спасибо, Машенька!")
+
+'''
+
+names = ['Klementina', 'Roza', 'Balu', 'Lena', 'Leonid']  # список имён
+
+class Person:
+    Vasya = ''
+    Masha = ''
+    Lena = ''
+    Leonid = ''
+
+# ниже ваш код:
+for name in names:
+    if hasattr(Person, name):
+        delattr(Person, name)
+# строки ниже не удаляйте, ради вселенной:
+print(len(Person.__dict__))
