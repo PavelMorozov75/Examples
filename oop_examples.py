@@ -118,6 +118,7 @@ print("Спасибо, Машенька!")
 
 '''
 
+'''
 names = ['Klementina', 'Roza', 'Balu', 'Lena', 'Leonid']  # список имён
 
 class Person:
@@ -132,3 +133,25 @@ for name in names:
         delattr(Person, name)
 # строки ниже не удаляйте, ради вселенной:
 print(len(Person.__dict__))
+'''
+
+class Village:
+
+    # ваш метод add_distance
+    def add_distance(self, dist):
+        # distance = 0
+        print(dist - self.distance)
+
+vasya = Village()
+masha = Village()
+slava = Village()
+
+vasya.distance = 200
+masha.distance = 400
+slava.distance = 700
+vasya.add_distance(1000)
+masha.add_distance(1000)
+slava.add_distance(1000)
+
+
+# вызовите методы для каждого экземпляра:
