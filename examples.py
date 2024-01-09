@@ -808,29 +808,7 @@ print(sorted(inventory, key=operator.itemgetter(1)))
 #word = word[:word.index(' ')]# Теперь Word это все символы до первого пробела
 
 
-'''
-class Date(object):
-    def __init__(self, day=0, month=0, year=0):
-        self.day = day
-        self.month = month
-        self.year = year
 
-    @classmethod
-    def from_string(cls, date_as_string):
-        day, month, year = map(int, date_as_string.split('.'))
-        date1 = cls(day, month, year)
-        return date1
-
-    def string_to_db(self):
-        return f'{self.year}-{self.month}-{self.day}'
-
-date1 = Date.from_string('30.12.2020')
-date1.string_to_db()
-# '2020-12-30'
-date2 = Date.from_string('01.01.2021')
-date2.string_to_db()
-# '2021-1-1'
-'''
 
 
 '''
@@ -1187,8 +1165,6 @@ it2 = range(10, 16)
 rez = chain(it1, it2)
 list(rez)
 '''
-
-
 
 
 
