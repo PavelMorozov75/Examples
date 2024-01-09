@@ -1,4 +1,4 @@
-'''
+
 def print_ab(a, b=50):
     print(a)
     print(b)
@@ -7,7 +7,7 @@ lst = [11, 12]
 print_ab(**args)
 print_ab(*args)
 print_ab(*lst)
-'''
+
 
 
 

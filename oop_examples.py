@@ -135,6 +135,7 @@ for name in names:
 print(len(Person.__dict__))
 '''
 
+'''
 class Village:
 
     # ваш метод add_distance
@@ -152,6 +153,63 @@ slava.distance = 700
 vasya.add_distance(1000)
 masha.add_distance(1000)
 slava.add_distance(1000)
+'''
+
+'''
+class Person:
+    @classmethod
+    def create_person(cls, name, age):
+        person = cls()
+        person.name = name
+        person.age = age
+        return person
+
+person1 = Person.create_person("Vasya", 25)
+print(person1.name)  # Vasya
+print(person1.age)   # 25
+'''
+
+'''
+class Time:
+    @staticmethod
+    def count_time(distance, speed):
+        return distance / speed
 
 
-# вызовите методы для каждого экземпляра:
+print(Time.count_time(500, 100))
+'''
+
+'''
+class Example:
+    @classmethod
+    def method_for_class(cls, x,y):
+        cls.x = x
+        cls.y = y
+        print(cls.x*cls.y)
+Example.method_for_class(5,20)
+'''
+
+'''
+class Date(object):
+    def __init__(self, day=0, month=0, year=0):
+        self.day = day
+        self.month = month
+        self.year = year
+
+    @classmethod
+    def from_string(cls, date_as_string):
+        day, month, year = map(int, date_as_string.split('.'))
+        date1 = cls(day, month, year)
+        return date1
+
+    def string_to_db(self):
+        return f'{self.year}-{self.month}-{self.day}'
+
+date1 = Date.from_string('30.12.2020')
+date1.string_to_db()
+# '2020-12-30'
+date2 = Date.from_string('01.01.2021')
+date2.string_to_db()
+# '2021-1-1'
+'''
+
