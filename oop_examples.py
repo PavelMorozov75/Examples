@@ -212,4 +212,10 @@ date2 = Date.from_string('01.01.2021')
 date2.string_to_db()
 # '2021-1-1'
 '''
+class Person:
+    pass
 
+person_1 = Person()
+person_1.__dict__ = {'name': 'Vasya', 'age': '20', 'work': 'driver'}
+for key in person_1.__dict__:
+    print(person_1.__dict__[key])

@@ -1166,5 +1166,8 @@ rez = chain(it1, it2)
 list(rez)
 '''
 
+from datetime import datetime
 
+today_year = datetime.today().year
+print(today_year)
 
