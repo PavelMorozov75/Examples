@@ -242,6 +242,70 @@ p2 = Point(20, 30)
 CountDistanse.dist_count(p1, p2)
 '''
 
+'''
+class Dog():
+    tail = 1
+    paws = 4
+    def __init__(self, name, color):
+        self.name = name
+        self.color = color
+
+    def bark(self):
+        print('ГавГав')
+
+class Human():
+    def __init__(self, name):
+        self.name = name
+
+    def adopt_dog(self, dog):
+        self.my_dog = dog
+
+    def print_human_name(self):
+        print(self.name)
+
+    def print_dog_name(self):
+        print(self.my_dog.name)
+
+
+
+
+dog = Dog('Шарик', 'черный')
+human = Human('Вася')
+human.adopt_dog(dog)
+human.print_dog_name()
+human.my_dog.bark()       # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+human.print_human_name()
+'''
+
+'''
+class EvenLenghtMixin:
+    # a = 6
+    def even_lenght(self):
+        # self.b = 8
+        return len(self) % 2 == 0
+
+class Mylist(list, EvenLenghtMixin):
+   def pop(self):
+       x = super(Mylist, self).pop()
+       # x = super().pop
+       print('last_value', x)
+       return x
+
+print(Mylist.mro())
+x = Mylist()
+x.extend([1, 2, 3, 4, 5])
+print(x.even_lenght())
+x.append(6)
+print(x.even_lenght())
+x.pop()
+print('действительно родитель  ', issubclass(Mylist, EvenLenghtMixin))
+print('действительно родитель  ', issubclass(EvenLenghtMixin, object))
+print('Дейстрвительно экземпляр класса', isinstance(x, Mylist))
+print(Mylist.__dict__)
+print(x.__dict__)
+'''
+
+'''
 from math import pi
 
 
@@ -286,3 +350,31 @@ print(b)
 print(b.fact())
 print(a.fact())
 print(b.area())
+
+'''
+
+'''
+class Minecraft:
+    def hello_creeper(self):
+        print("Hello, Creeper")
+
+class Roblox(Minecraft):
+    def hello_all(self):
+        super().hello_creeper()
+        print('Hello, Pozzy')
+hello = Roblox()
+hello.hello_all()
+'''
+
+
+class Alfa:
+    @staticmethod
+    def sum_number(x, y):
+        return x + y
+
+class Beta(Alfa):
+    def result(self, x, y , z):
+        summa = super().sum_number(x,y)
+        print(summa/z)
+test = Beta()
+test.result(10, 20, 30)
