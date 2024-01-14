@@ -366,7 +366,7 @@ hello = Roblox()
 hello.hello_all()
 '''
 
-
+'''
 class Alfa:
     @staticmethod
     def sum_number(x, y):
@@ -378,3 +378,27 @@ class Beta(Alfa):
         print(summa/z)
 test = Beta()
 test.result(10, 20, 30)
+'''
+
+
+class A:
+    def __init__(self):
+        print('класс А')
+        super().__init__()
+
+
+class B:
+    def __init__(self):
+        print('класс В')
+
+
+class C:
+    def __init__(self):
+        print('класс С')
+
+
+class D(A, B, C):
+    pass
+
+
+d = D()
