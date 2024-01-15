@@ -380,11 +380,12 @@ test = Beta()
 test.result(10, 20, 30)
 '''
 
-
+'''
 class A:
     def __init__(self):
         print('класс А')
         super().__init__()
+
 
 
 class B:
@@ -400,5 +401,34 @@ class C:
 class D(A, B, C):
     pass
 
-
 d = D()
+'''
+
+'''
+class User:
+    def __init__(self, name):
+        self.name = name
+
+        # создайте метод __getattribute__
+
+    def __getattribute__(self, item):
+        return f"{object.__getattribute__(self, item)}man"
+
+
+user1 = User("Super")
+user2 = User("Bat")
+user3 = User("Spider")
+
+print(user1.name, user2.name, user3.name, sep='\n')
+
+'''
+
+class Person:
+    def __getattr__(self, name):
+        if name == 'name':
+            return 'Vasya'
+        else:
+            return 'Такого атрибута нет'
+person = Person()
+print(person.name)
+
