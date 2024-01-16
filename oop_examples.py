@@ -423,6 +423,7 @@ print(user1.name, user2.name, user3.name, sep='\n')
 
 '''
 
+'''
 class Person:
     def __getattr__(self, name):
         if name == 'name':
@@ -431,4 +432,38 @@ class Person:
             return 'Такого атрибута нет'
 person = Person()
 print(person.name)
+'''
+
+'''
+class OnlyVasya:
+    def __setattr__(self, name, value):
+        if name == 'name':
+            value = 'Vasya'
+        return super().__setattr__(name, value)
+obj = OnlyVasya()
+obj.name = 'Masha'
+print(obj.name)
+'''
+
+class Number:
+    def __init__(self, a, b):
+        self.a = a
+        self.b = b
+        self.s = self.a + self.b
+        del self.s
+
+    def __delattr__(self, name):
+        if self.s > 10:
+            pass
+        else:
+            super().__delattr__(name)
+
+number1 = Number(4, 5)
+print('s' in number1.__dict__)
+
+number2 = Number(6, 11)
+print('s' in number2.__dict__)
+        
+
+
 

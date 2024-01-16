@@ -998,6 +998,8 @@ employees_2 = {}.fromkeys(working_days, 0)
 print(employees_2)
 
 '''
+
+'''
 import pytest
 
 from datetime import datetime, timedelta
@@ -1018,4 +1020,10 @@ def test_timedistance_v0(a, b, expected):
 def test_timedistance_v1(a, b, expected):
     diff = a - b
     assert diff == expected
+'''
+
+
+my_dict = {'apple': 1, 'banana': 2, 'cherry': 3}
+new_dict = {k: v for k, v in my_dict.items() if k != 'banana'}
+
 
