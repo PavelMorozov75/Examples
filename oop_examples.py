@@ -444,7 +444,7 @@ obj = OnlyVasya()
 obj.name = 'Masha'
 print(obj.name)
 '''
-
+'''
 class Number:
     def __init__(self, a, b):
         self.a = a
@@ -463,7 +463,27 @@ print('s' in number1.__dict__)
 
 number2 = Number(6, 11)
 print('s' in number2.__dict__)
+'''
 
+'''
+class Number:
+    def __init__(self, a, b):
+        self.a = a
+        self.b = b
+
+
+    def __delattr__(self, name):
+        if name == 'a':
+            print('не буду удалять a')
+            pass
+        else:
+            super().__delattr__(name)
+
+num = Number(b=4,a=7)
+del num.a
+del num.b
+print(num.a)
+'''
 
 '''
 class Cord:
@@ -488,7 +508,57 @@ print(cord1 == 50)     # True
 print(cord1 != cord2)  # False
 print(cord1 != 50)     # False
 '''
-        
 
+'''
+class Words:
+    def __init__(self, word):
+        self.word = word
+
+    def __eq__(self, other):
+        return len(self.word) == len(other.word)
+
+word_1 = Words('Vasya')
+word_2 = Words('Masha')
+print(word_1 == word_2)
+'''
+
+'''
+class Number:
+    def __init__(self, number):
+        self.number = number
+    def __add__(self, other):
+        if isinstance(other, Number):
+            return self.number + other.number
+        if isinstance(other, int):
+            return self.number + other
+
+num1 = Number(100)
+num2 = Number(200)
+print(num1 + num2)
+print(num1 + 300)
+print(num2 + 300)
+'''
+
+'''
+class Number:
+    def __init__(self, number):
+        self.number = number
+
+    def __isub__(self, other):
+        if isinstance(other, Number):
+            self.number -= other.number  # экземпляр вычитает экземпляр
+            return self
+        if isinstance(other, int):
+            self.number -= other         # экземпляр вычитает число
+            return self
+
+num1 = Number(50)
+num2 = Number(20)
+
+num1 -= num2
+print(num1.number)  # 30
+num1 -= 30
+print(num1.number)  # 0
+'''
 
 
