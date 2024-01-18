@@ -463,6 +463,31 @@ print('s' in number1.__dict__)
 
 number2 = Number(6, 11)
 print('s' in number2.__dict__)
+
+
+'''
+class Cord:
+    def __init__(self, x):
+        self.x = x
+
+    def __eq__(self, other):
+        if isinstance(other, Cord):     # принадлежит ли экземпляр классу Cord?
+            return self.x == other.x
+        if isinstance(other, int):      # принадлежит ли экземпляр классу int?
+            return self.x == other
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
+cord1 = Cord(50)
+cord2 = Cord(50)
+
+print(cord1 == cord2)  # True
+print(cord1 == 50)     # True
+
+print(cord1 != cord2)  # False
+print(cord1 != 50)     # False
+'''
         
 
 

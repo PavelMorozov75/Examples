@@ -992,12 +992,11 @@ print(today_year)
 '''
 
 '''
-
 working_days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
 employees_2 = {}.fromkeys(working_days, 0)
 print(employees_2)
-
 '''
+
 
 '''
 import pytest
@@ -1022,8 +1021,9 @@ def test_timedistance_v1(a, b, expected):
     assert diff == expected
 '''
 
-
+'''
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 my_dict = {'apple': 1, 'banana': 2, 'cherry': 3}
 new_dict = {k: v for k, v in my_dict.items() if k != 'banana'}
 
-
+'''
