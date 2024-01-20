@@ -495,19 +495,30 @@ class Cord:
             return self.x == other.x
         if isinstance(other, int):      # принадлежит ли экземпляр классу int?
             return self.x == other
+        if isinstance(other, Cord1):
+            return self.x == other.x
 
     def __ne__(self, other):
         return not self.__eq__(other)
 
+class  Cord1:
+    def __init__(self,x):
+        self.x = x
+
+
 cord1 = Cord(50)
 cord2 = Cord(50)
+cord11 = Cord1(25)
 
 print(cord1 == cord2)  # True
 print(cord1 == 50)     # True
 
 print(cord1 != cord2)  # False
 print(cord1 != 50)     # False
+print(cord1 == cord11) # False
 '''
+
+
 
 '''
 class Words:
@@ -561,4 +572,92 @@ num1 -= 30
 print(num1.number)  # 0
 '''
 
+'''
+class Number:
+    def __init__(self, x):
+        self.x = x
+    def __sub__(self, other):
+        if isinstance(other, Number):
+            return self.x - other.x
 
+num1 = Number(70)
+num2 = Number(20)
+print(num1-num2)
+'''
+
+'''
+class Hello:
+    def __init__(self, say):
+        self.say = say
+
+    # Ваш код
+    def __mul__(self, other):
+        if isinstance(other, int):
+            return self.say * other
+
+lang = Hello('Hello!')
+print(lang * 3)  # Hello!Hello!Hello!
+'''
+
+'''
+class Number:
+    def __init__(self, number):
+        self.number = number
+
+    def __pow__(self, power):
+        if isinstance(power, int):
+            return self.number ** power
+num = Number(10)
+print(num**2)
+'''
+
+'''
+class Number:
+    def __init__(self, number):
+        self.number = number
+
+    def __truediv__(self, other):
+        if isinstance(other, int) and other != 0:
+            return self.number / other
+        if other == 0:
+            return 'на ноль делить нельзя'
+
+num = Number(10)
+print(num / 2 )
+print(num / 0)
+'''
+
+
+class Number:
+# Объявите здесь все необходимые методы для операций
+    def __init__(self, number):
+        self.number = number
+    def __add__(self, other):
+        if isinstance(other, int):
+            return self.number + other
+    def __truediv__(self, other):
+        if isinstance(other, int) and other != 0:
+            return self.number / other
+    def __mul__(self, other):
+        if isinstance(other, int):
+            return self.number * other
+    def __pow__(self, power, modulo=None):
+        if isinstance(power, int):
+            return self.number ** power
+
+    def __sub__(self, other):
+        if isinstance(other, int):
+            return self.number - other
+
+    def __abs__(self):
+        return abs(self.number)
+
+# код ниже не меняйте ради вселенной
+num1 = Number(-10)
+result1 = num1 + 90
+result2 = num1 / 10
+result3 = num1 * -1
+result4 = num1 ** 2
+result5 = num1 - 20
+result6 = abs(num1)
+print(result1, result2, result3, result4, result5, result6)
