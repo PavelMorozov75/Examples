@@ -626,8 +626,31 @@ num = Number(10)
 print(num / 2 )
 print(num / 0)
 '''
+'''
+class Number:
+    def __init__(self, number):
+        self.number = number
+
+    def __add__(self, other):
+        if isinstance(other, Number):
+            result = self.number + other.number
+        else:
+            result = self.number + other
+        return Number(result)  # создаёт новый экземпляр
+
+    def __radd__(self, other):
+        result = self.number + other
+        return Number(result)  # создаёт новый экземпляр
+
+obj1 = Number(10)
+obj2 = Number(20)
+obj3 = obj1 + 5 + obj2
+
+print(obj3.number) # 35
+'''
 
 
+'''
 class Number:
 # Объявите здесь все необходимые методы для операций
     def __init__(self, number):
@@ -661,3 +684,50 @@ result4 = num1 ** 2
 result5 = num1 - 20
 result6 = abs(num1)
 print(result1, result2, result3, result4, result5, result6)
+'''
+
+'''
+class Person:
+    def __init__(self, name):
+        self.name = name
+
+    def __str__(self):
+        return f"Да здравствует {self.name}!"
+        # напишите ваш код
+
+# Код ниже пожалуйста не меняйте:
+input_word = input()
+person = Person(input_word)
+print(person)
+'''
+
+'''
+class Car:
+    def __init__(self, model, color, year):
+        self.model = model
+        self.color  = color
+        self.year = year
+
+    def __str__(self):
+        return f"{self.__class__.__name__}"  #!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+car = Car('toyota corolla', 'black', 2023)
+print(f"Класс: {car},", f"Атрибуты экземпляра: {car.__dict__}")
+'''
+
+
+class Car:
+    def __init__(self, model, color):
+        self.model = model
+        self.color = color
+
+    # ваш код:
+    def __hash__(self):
+        return hash((self.model, self.color)) # внимание скобки !!!!
+
+
+
+
+car1 = Car("toyota corolla", "black")
+car2 = Car("toyota corolla", "black")
+print(hash(car1) == hash(car2))
