@@ -715,7 +715,7 @@ car = Car('toyota corolla', 'black', 2023)
 print(f"Класс: {car},", f"Атрибуты экземпляра: {car.__dict__}")
 '''
 
-
+'''
 class Car:
     def __init__(self, model, color):
         self.model = model
@@ -731,3 +731,62 @@ class Car:
 car1 = Car("toyota corolla", "black")
 car2 = Car("toyota corolla", "black")
 print(hash(car1) == hash(car2))
+'''
+
+'''
+class MyPhone:
+    def __init__(self):
+        self.phone = ['Nokia', 'Iphone', 'Samsung', 'Huawei', 'LG']
+
+    def __str__(self):
+        return str(self.phone)
+
+    # напишите ваши методы
+    def __setitem__(self, key, value):
+        self.phone[key] = value
+
+    def __delitem__(self, key):
+        del self.phone[key]
+
+    def __getitem__(self, item):
+        return self.phone[item]
+
+    def kruchu_verchu(self, value):
+        self.phone.append(value)
+
+
+# код ниже не меняйте, но присмотритесь
+my_phone = MyPhone()
+
+my_phone[1] = 'Xiaomi'
+del my_phone[2]
+my_phone.kruchu_verchu('HONOR')
+
+print(my_phone)
+print(my_phone[4])
+'''
+
+
+class Present:
+    def __init__(self):
+        self.present = ['book', 'Iphone', 'TV', 'snowman', 'car']
+
+    # ваши методы
+
+    def __getitem__(self, item):
+        return self.present[item]
+
+    def __len__(self):
+        return len(self.present)
+
+    def __delitem__(self, key):
+        del self.present[key]
+
+holiday = Present()
+# ваш код, если потребуется
+del holiday[-1]
+
+# код ниже не удаляйте, ради Маши!
+if len(holiday) == 4:
+    print(holiday[3])
+

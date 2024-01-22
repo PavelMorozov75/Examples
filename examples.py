@@ -1027,3 +1027,4 @@ my_dict = {'apple': 1, 'banana': 2, 'cherry': 3}
 new_dict = {k: v for k, v in my_dict.items() if k != 'banana'}
 
 '''
+
