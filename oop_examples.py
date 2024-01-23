@@ -21,6 +21,83 @@ for i in friends.__dict__:
 '''
 
 '''
+class Human:
+
+    default_name = "No name"
+    default_age = 0
+
+    def __init__(self, name=default_name, age = default_age):
+        self.name = name
+        self.age = age
+        self.__money = 0
+        self.__house = None
+
+    def info (self):
+        print(f'Name: {self.name}')
+        print(f'Age: {self.age}')
+        print(f'Money: {self.__money}')
+        print(f'House: {self.__house}')
+
+    @staticmethod
+    def default_info():
+        print(f'Default_Name: {Human.default_name}')
+        print(f'Default_Age: {Human.default_age}')
+
+    def buy_house(self, house, discount):
+        price = house.final_price(discount)
+        if self.__money >= price:
+            self.__make_deal(house, price)
+        else:
+            print('Not enough money')
+
+    def __make_deal(self, house, price):
+        self.__money -= price
+        self.__house = house
+
+    def earn_money(self, amount):
+        self.__money += amount
+        print(f'Earned {amount} money. Current value{self.__money}')
+
+class House:
+    def __init__(self, area, price):
+        self._area = area
+        self._price = price
+
+    def final_price(self, discount):
+        final_price = self._price - self._price * discount/100
+        print(f'Final price: {final_price}')
+        return final_price
+
+class SmallHouse(House):
+    default_area = 40
+    def __init__(self, price):
+        super().__init__(SmallHouse.default_area, price)
+
+
+
+Human.default_info()
+alexander = Human('Sacha', 27)
+alexander.info()
+small_house = SmallHouse(8500)
+alexander.buy_house(small_house, 5)
+alexander.earn_money(5000)
+alexander.buy_house(small_house, 5)
+alexander.earn_money(20000)
+alexander.buy_house(small_house, 5)
+alexander.info()
+
+fedor = Human('Fedor', 25)
+fedor.info()
+Human.default_info()
+fedor.earn_money(10000)
+fedor.info()
+house = House(100, 15000)
+fedor.buy_house(house, 3)
+'''
+
+
+
+'''
 file = {'name': 'Alex', 'age': 18, 'hobby': 'films'}
 class Person:
     pass
