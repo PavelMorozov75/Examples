@@ -843,7 +843,7 @@ print(my_phone)
 print(my_phone[4])
 '''
 
-
+'''
 class Present:
     def __init__(self):
         self.present = ['book', 'Iphone', 'TV', 'snowman', 'car']
@@ -867,3 +867,47 @@ del holiday[-1]
 if len(holiday) == 4:
     print(holiday[3])
 
+'''
+
+'''
+class Country:
+    country = ('Russia', 'Ukraine', 'Belarus', 'Kazakhstan', 'Other')
+
+    # создайте метод(ы)
+    def __getitem__(self, item):
+        return Country.country[item]
+
+
+# код ниже, не меняйте, ради Машеньки
+country_is = Country()
+for i in country_is:
+    if i == 'Kazakhstan':
+        print(f'Ура, Маша летит в Казахстан!')
+'''
+
+
+class MyList:
+    def __init__(self):
+        self.data = [1, 2, 3]
+        self.index = 0
+
+    # объявите методы __iter__ и __next__
+    def __iter__(self):
+        print("Запустился __iter__")
+        return self
+
+    def __next__(self):
+        if self.index < len(self.data):
+            print("Запустился __next__")
+            dat = self.data[self.index]
+            self.index += 1
+        else:
+            raise StopIteration
+            pass
+        return dat
+
+
+# код ниже пожалуйста не меняйте
+my_list = MyList()
+for i in my_list:
+    pass
