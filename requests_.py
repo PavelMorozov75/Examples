@@ -1,7 +1,6 @@
-'''
 import requests
-
-payload = {'key1': 'value1', 'key2': 'value2'}
+'''
+pyload = {'key1': 'value1', 'key2': 'value2'}
 r = requests.get('https://httpbin.org/get', params=payload)
 '''
 
@@ -15,13 +14,12 @@ print(res.encoding)
 #print(res.text)
 '''
 
-'''
+
 url = 'https://api.github.com/some/endpoint'
 headers = {'user-agent': 'my-app/0.0.1'}
 r = requests.get(url, headers=headers)
 print(r.json())
 print(r.text)
-'''
 
 '''
 payload = {'key1': 'value1', 'key2': 'value2'}

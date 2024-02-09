@@ -885,7 +885,7 @@ for i in country_is:
         print(f'Ура, Маша летит в Казахстан!')
 '''
 
-
+'''
 class MyList:
     def __init__(self):
         self.data = [1, 2, 3]
@@ -911,3 +911,28 @@ class MyList:
 my_list = MyList()
 for i in my_list:
     pass
+'''
+
+
+class A:
+    pass
+class B:
+    pass
+
+a = A()
+print(a.__class__)
+print(a.__module__)
+print(__name__)
+
+
+class Options:
+    def __init__(self):
+        self.attr1 = "value1"
+        self.attr2 = "value2"
+
+options = Options()
+options_dict = vars(options)
+
+print(options_dict) # Output: {'attr1': 'value1', 'attr2': 'value2'}
+print(options.__dict__)
+

@@ -840,5 +840,90 @@ def test_timedistance_v1(a, b, expected):
 my_dict = {'apple': 1, 'banana': 2, 'cherry': 3}
 new_dict = {k: v for k, v in my_dict.items() if k != 'banana'}
 
+my_dict[None] = 5
+print(my_dict)
 '''
 
+'''
+from oop_examples import CC
+import sys, os
+class A:
+    pass
+print (sys.modules)
+print(sys.modules[A.__module__])
+print(sys.modules[A.__module__].__file__)
+
+print('CC.__module__  ', CC.__module__)
+print('sys.modules[CC.__module__]   ', sys.modules[CC.__module__])
+print('sys.modules[CC.__module__].__file__   ', sys.modules[CC.__module__].__file__)
+
+
+print('__name__ ', __name__)
+print('__file__', __file__)
+print('sys.argv  ', sys.argv)
+print('os.getcwd()  ', os.getcwd())
+'''
+
+'''
+dd = {}
+dd[None] = 3
+print(dd)
+'''
+
+
+'''
+import os
+print(dict(os.environ))
+for key, value in os.environ.items():
+    print(key, '', value)
+'''
+
+'''
+print(100//13)
+print(100%13)
+'''
+
+'''
+from random import randint, choice
+seq_sum = 200
+quantity = 7
+
+medium = seq_sum // quantity
+mod = seq_sum % quantity
+result = [medium + 1 * (j < mod) for j in range(quantity)]
+print(sum(result))
+print(result)
+
+print(len(result) // 2)
+
+for i in range(len(result) // 2):
+    value = randint(1, min(result[i], result[-(i + 1)] - 1)) * (-1) * choice((-1, 1))
+    print('value ', value)
+    result[i] += value
+    print(result[i])
+    result[-(i + 1)] -= value
+    print(result[-(i + 1)])
+
+print(tuple(result))
+print(sum(result))
+'''
+'''
+from random import randint
+weights = [randint(10 ** i, 10 ** (i + 1)) for i in range(10)]
+costs = [randint(10 ** i, 10 ** (i + 1)) for i in range(10)]
+print(weights)
+print(costs)
+'''
+
+from decimal import Decimal
+number = 3.25887
+acc =0
+
+exp = f"1{'.' * bool(acc)}{'0' * acc}"
+print(bool(acc))
+print('.' * bool(acc))
+print('0' * acc)
+print('exp = ', exp)
+
+res = float(Decimal(str(number)).quantize(Decimal(exp)))
+print(res)
