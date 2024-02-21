@@ -889,7 +889,10 @@ seq_sum = 200
 quantity = 7
 
 medium = seq_sum // quantity
+print('medium ', medium)
 mod = seq_sum % quantity
+print('mod ', mod)
+
 result = [medium + 1 * (j < mod) for j in range(quantity)]
 print(sum(result))
 print(result)
@@ -907,6 +910,7 @@ for i in range(len(result) // 2):
 print(tuple(result))
 print(sum(result))
 '''
+
 '''
 from random import randint
 weights = [randint(10 ** i, 10 ** (i + 1)) for i in range(10)]
@@ -915,6 +919,8 @@ print(weights)
 print(costs)
 '''
 
+
+'''
 from decimal import Decimal
 number = 3.25887
 acc =0
@@ -926,4 +932,121 @@ print('0' * acc)
 print('exp = ', exp)
 
 res = float(Decimal(str(number)).quantize(Decimal(exp)))
+res1 = Decimal(str(number)).quantize(Decimal(exp))
 print(res)
+print(res1)
+'''
+
+'''
+import pytest_testrail
+import pytest
+from pytest_testrail.plugin import pytestrail
+for i in range(0, 6, 2):
+        with subtests.test(i=i):
+            assert i % 2 == 0
+'''
+
+'''
+x = {'one': 0, 'two': 20, 'three': 3, 'four': 4}
+xx = x.setdefault('six', 6)
+print(xx)
+
+'''
+
+'''
+import datetime
+from datetime import timedelta
+
+
+date = datetime.datetime(2023, 10, 30, )
+month_to_add = 47
+
+years = int(month_to_add / 12)
+print(years)
+month = abs(month_to_add) % 12
+print(month)
+if month_to_add < 0:
+    month *= - 1
+
+new_month = (date.month + month) % 12 or 12
+print('date.month', date.month)
+nw = (date.month + month) % 12
+print('nw', nw)
+print('new_month', new_month)
+
+years += (date.month + month) // 13
+print('years ', years)
+
+aa = date.replace(year=date.year + years, month=new_month)
+print(aa)
+'''
+
+'''
+import collections
+c = {'weight': 1100.0, 'cost': 2000.0}
+b = {'weight': 7974.88, 'cost': 2338806.97}
+c1 = collections.Counter(c)
+b1 = collections.Counter(b)
+# print(c1+b1)
+'''
+
+
+lst = [{'id': 1, 'val':1}, {'id': 2, 'val':3}, {'id': 1, 'val':4}]
+def f(lst):
+    dct = {}
+    for x in lst:
+        if x['id'] in dct:
+            dct[x['id']] += x['val']
+        else:
+            dct[x['id']] = x['val']
+    print(dct)
+    return [{'id': x, 'val': y} for x, y in dct.items()]
+
+print(f(lst))
+
+
+
+lst2 = [{'id': 1, 'val':1, 's': 5}, {'id': 2, 'val':3, 's': 8}, {'id': 1, 'val':4, 's': 15}]
+def f2(lst):
+    dct = {}
+    for x in lst:
+        if x['id'] in dct:
+            dct['id'] = x['id']
+            dct['val'] += x['val']
+            dct['s'] += x['s']
+
+        else:
+            dct['id'] = x['id']
+            dct['val'] = x['val']
+            dct['s'] = x['s']
+    return dct
+print(f2(lst2))
+
+
+
+
+
+from functools import reduce
+data = [{'id': 'a', 'val': 1, 'a': 7}, {'id': 'b', 'val':3, 'a': 9 }, {'id': 'a', 'val':4, 'a': 14}, {'id': 'b', 'val': 8, 'a': 50 } ]
+def f(d, x):
+    k = x['id']
+    if k in d:
+        d[k]['val'] += x['val']
+        d[k]['a'] += x['a']
+    else:
+        d[k] = x
+    return d
+#print (reduce(f, data, {}))
+print (list(reduce(f, data, {}).values()))
+
+'''
+data = [{'id': 1, 'val':1, 'a': 'd'}, {'id': 2, 'val':3, 'a': 'b' }, {'id': 1, 'val':4, 'a': 'c'} ]
+def f(d, x):
+    k = x['id']
+    if k in d:
+         d[k]['val'] = max(x['val'] for d in data)
+    else:
+        d[k] = x
+    return d
+print reduce(f, data, {}).values()
+'''
