@@ -1027,17 +1027,17 @@ print(f2(lst2))
 
 
 from functools import reduce
-data = [{'id': 'a', 'val': 1, 'a': 7}, {'id': 'b', 'val':3, 'a': 9 }, {'id': 'a', 'val':4, 'a': 14}, {'id': 'b', 'val': 8, 'a': 50 } ]
+data = [{'id': 'a', 'val': 1, 'a': 7}, {'id': 'b', 'val':3, 'a': 9 }, {'id': 'a', 'val':4, 'a': 14}, {'id': 'b', 'val': 8, 'a': 50 }, {'d': 'b', 'val': 8, 'a': 50}  ]
 def f(d, x):
-    k = x['id']
+    k = x.get('id')
     if k in d:
         d[k]['val'] += x['val']
         d[k]['a'] += x['a']
     else:
         d[k] = x
     return d
-#print (reduce(f, data, {}))
-print (list(reduce(f, data, {}).values()))
+print (reduce(f, data, {}))
+#print (list(reduce(f, data, {}).values()))
 
 '''
 data = [{'id': 1, 'val':1, 'a': 'd'}, {'id': 2, 'val':3, 'a': 'b' }, {'id': 1, 'val':4, 'a': 'c'} ]
