@@ -770,7 +770,7 @@ for val1, val2 in enumerate(a):
 '''
 
 
-'''
+
 from itertools import chain
 # Suppose we have the following dictionary:
 res = {
@@ -781,7 +781,7 @@ res = {
 
 
 
-
+'''
 length = len(list(chain(*list(res.values()))))
 print(res.values())
 print(list(res.values()))
@@ -990,7 +990,7 @@ b1 = collections.Counter(b)
 # print(c1+b1)
 '''
 
-
+'''
 lst = [{'id': 1, 'val':1}, {'id': 2, 'val':3}, {'id': 1, 'val':4}]
 def f(lst):
     dct = {}
@@ -1003,9 +1003,9 @@ def f(lst):
     return [{'id': x, 'val': y} for x, y in dct.items()]
 
 print(f(lst))
+'''
 
-
-
+'''
 lst2 = [{'id': 1, 'val':1, 's': 5}, {'id': 2, 'val':3, 's': 8}, {'id': 1, 'val':4, 's': 15}]
 def f2(lst):
     dct = {}
@@ -1021,23 +1021,25 @@ def f2(lst):
             dct['s'] = x['s']
     return dct
 print(f2(lst2))
+'''
 
 
 
-
-
+'''
 from functools import reduce
-data = [{'id': 'a', 'val': 1, 'a': 7}, {'id': 'b', 'val':3, 'a': 9 }, {'id': 'a', 'val':4, 'a': 14}, {'id': 'b', 'val': 8, 'a': 50 }, {'d': 'b', 'val': 8, 'a': 50}  ]
+data = [{'id': 'a', 'val': 1, 'a': 7}, {'id': 'b', 'val':3, 'a': 9 }, {'id': 'a', 'val':4, 'a': 14}, {'id': 'b', 'val': 8, 'a': 50 } ]
 def f(d, x):
-    k = x.get('id')
+    k = x['id']
     if k in d:
         d[k]['val'] += x['val']
         d[k]['a'] += x['a']
     else:
         d[k] = x
     return d
-print (reduce(f, data, {}))
-#print (list(reduce(f, data, {}).values()))
+#print (reduce(f, data, {}))
+print (list(reduce(f, data, {}).values()))
+'''
+
 
 '''
 data = [{'id': 1, 'val':1, 'a': 'd'}, {'id': 2, 'val':3, 'a': 'b' }, {'id': 1, 'val':4, 'a': 'c'} ]
@@ -1050,3 +1052,24 @@ def f(d, x):
     return d
 print reduce(f, data, {}).values()
 '''
+'''
+import uuid
+session_id = str(uuid.uuid4())
+print(session_id)
+'''
+
+
+from datetime import datetime
+
+# Assuming supply_date is a datetime object
+supply_date = datetime.now()
+
+# Format the datetime object into a string with microseconds truncated to three decimal places
+supply_date_str = supply_date.strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
+
+print(supply_date_str)
+
+sorting_start_date = datetime.today().replace(day=1)
+print(sorting_start_date.strftime("%Y-%m-%d %H:%M:%S.%f")[:-3])
+
+

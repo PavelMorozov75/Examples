@@ -1,4 +1,4 @@
-'''
+
 lst = [1, 2, 3, 34]
 book = {'author': 'Pushkin', 'title': 'Golden Fish', 'year': 1785}
 str = 'Hallo for all'
@@ -21,7 +21,7 @@ while True:
         print(i)
     except StopIteration:
         break
-'''
+
 
 
 
