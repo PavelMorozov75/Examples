@@ -744,11 +744,11 @@ with open('example.csv', "a") as f:
         writter.writerow(student)
 '''
 
-'''
+
 import uuid
 session_id = str(uuid.uuid4())
 print(session_id)
-'''
+
 
 '''
 lst = [1,2,25,3,4,5,5]
@@ -990,7 +990,7 @@ b1 = collections.Counter(b)
 # print(c1+b1)
 '''
 
-
+'''
 lst = [{'id': 1, 'val':1}, {'id': 2, 'val':3}, {'id': 1, 'val':4}]
 def f(lst):
     dct = {}
@@ -1003,9 +1003,10 @@ def f(lst):
     return [{'id': x, 'val': y} for x, y in dct.items()]
 
 print(f(lst))
+'''
 
 
-
+'''
 lst2 = [{'id': 1, 'val':1, 's': 5}, {'id': 2, 'val':3, 's': 8}, {'id': 1, 'val':4, 's': 15}]
 def f2(lst):
     dct = {}
@@ -1021,11 +1022,11 @@ def f2(lst):
             dct['s'] = x['s']
     return dct
 print(f2(lst2))
+'''
 
 
 
-
-
+'''
 from functools import reduce
 data = [{'id': 'a', 'val': 1, 'a': 7}, {'id': 'b', 'val':3, 'a': 9 }, {'id': 'a', 'val':4, 'a': 14}, {'id': 'b', 'val': 8, 'a': 50 }, {'d': 'b', 'val': 8, 'a': 50}  ]
 def f(d, x):
@@ -1040,6 +1041,8 @@ print (reduce(f, data, {}))
 #print (list(reduce(f, data, {}).values()))
 
 '''
+
+'''
 data = [{'id': 1, 'val':1, 'a': 'd'}, {'id': 2, 'val':3, 'a': 'b' }, {'id': 1, 'val':4, 'a': 'c'} ]
 def f(d, x):
     k = x['id']
@@ -1050,3 +1053,35 @@ def f(d, x):
     return d
 print reduce(f, data, {}).values()
 '''
+
+
+lst = [['45'], ['43'], ['35'], ['33'], ['29'], ['27'], ['45', ' 43', ' 35', ' 33', ' 29', ' 27']]
+lst2 = [['198', ' 193', ' 189', ' 184', ' 180', ' 177', ' 172']]
+
+
+def make_norm_list(lst):
+    new_lst = []
+    for item in lst:
+        if len(item) > 1:
+            for item_item in item:
+                if item_item.strip()[0] not in new_lst:
+                    new_lst.append(item_item.strip()[0])
+        else:
+            new_lst.append(item[0])
+    return new_lst
+
+lst3 = ['111', '111', '111, 16, 15']
+
+def make_norm_list2(lst):
+    new_lst = []
+    for item in lst:
+        if ',' in item:
+            item_lst = item.split(',')
+            for item_item in item_lst:
+                if item_item.strip() not in new_lst:
+                    new_lst.append(item_item.strip())
+        else:
+            if item not in new_lst:
+                new_lst.append(item)
+    return new_lst
+print(make_norm_list2(lst3))
