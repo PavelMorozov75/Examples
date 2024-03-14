@@ -1059,22 +1059,6 @@ print(session_id)
 '''
 
 
-from datetime import datetime
-
-# Assuming supply_date is a datetime object
-supply_date = datetime.now()
-
-# Format the datetime object into a string with microseconds truncated to three decimal places
-supply_date_str = supply_date.strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
-
-print(supply_date_str)
-
-sorting_start_date = datetime.today().replace(day=1)
-print(sorting_start_date.strftime("%Y-%m-%d %H:%M:%S.%f")[:-3])
-
-
-
-
 
 lst = [['45'], ['43'], ['35'], ['33'], ['29'], ['27'], ['45', ' 43', ' 35', ' 33', ' 29', ' 27']]
 lst2 = [['198', ' 193', ' 189', ' 184', ' 180', ' 177', ' 172']]
@@ -1106,3 +1090,37 @@ def make_norm_list2(lst):
                 new_lst.append(item)
     return new_lst
 print(make_norm_list2(lst3))
+
+'''
+from datetime import datetime
+
+# Assuming supply_date is a datetime object
+supply_date = datetime.now()
+
+# Format the datetime object into a string with microseconds truncated to three decimal places
+supply_date_str = supply_date.strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
+
+print(supply_date_str)
+
+sorting_start_date = datetime.today().replace(day=1)
+print(sorting_start_date.strftime("%Y-%m-%d %H:%M:%S.%f")[:-3])
+
+'''
+import json
+from datetime import datetime
+sorting_start_date = datetime.today().replace(day=1)
+sorting_close_date = datetime.today()
+sorting_result = {
+            "CloseDate": sorting_close_date.strftime("%Y-%m-%dT%H:%M:%S"),
+            "StartDate": sorting_start_date.strftime("%Y-%m-%dT%H:%M:%S"),
+            "TotalWeight": 0,
+            "WeightByTask": {}
+
+        }
+print(sorting_result)
+print(str(sorting_result))
+sorting_result1 = str(sorting_result).replace("'", '"')
+sorting_result2 = json.dumps(sorting_result)
+print(sorting_result1)
+print(sorting_result2)
+
