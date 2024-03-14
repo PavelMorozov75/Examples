@@ -744,11 +744,11 @@ with open('example.csv', "a") as f:
         writter.writerow(student)
 '''
 
-
+'''
 import uuid
 session_id = str(uuid.uuid4())
 print(session_id)
-
+'''
 
 '''
 lst = [1,2,25,3,4,5,5]
@@ -1005,7 +1005,6 @@ def f(lst):
 print(f(lst))
 '''
 
-
 '''
 lst2 = [{'id': 1, 'val':1, 's': 5}, {'id': 2, 'val':3, 's': 8}, {'id': 1, 'val':4, 's': 15}]
 def f2(lst):
@@ -1053,6 +1052,28 @@ def f(d, x):
     return d
 print reduce(f, data, {}).values()
 '''
+'''
+import uuid
+session_id = str(uuid.uuid4())
+print(session_id)
+'''
+
+
+from datetime import datetime
+
+# Assuming supply_date is a datetime object
+supply_date = datetime.now()
+
+# Format the datetime object into a string with microseconds truncated to three decimal places
+supply_date_str = supply_date.strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
+
+print(supply_date_str)
+
+sorting_start_date = datetime.today().replace(day=1)
+print(sorting_start_date.strftime("%Y-%m-%d %H:%M:%S.%f")[:-3])
+
+
+
 
 
 lst = [['45'], ['43'], ['35'], ['33'], ['29'], ['27'], ['45', ' 43', ' 35', ' 33', ' 29', ' 27']]
