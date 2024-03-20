@@ -20,3 +20,12 @@ variable = {key: value for key, value in ddict.items() if value > 5}
 a = [i for i in range(5)][1:]
 print(a)
 '''
+
+'''
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+my_dict = {'apple': 1, 'banana': 2, 'cherry': 3}
+new_dict = {k: v for k, v in my_dict.items() if k != 'banana'}
+
+my_dict[None] = 5
+print(my_dict)
+'''

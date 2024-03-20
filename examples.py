@@ -369,15 +369,7 @@ for path in sys.path:
     print(path)
 '''
 
-'''
-import datetime as dt
-j, m, d = map(int, input().split())
-int_delta= int(input())
-new_date = dt.datetime(j,m,d)+dt.timedelta(days=int_delta)
-print (int(new_date.strftime('%Y')), int(new_date.strftime('%m')), int((new_date.strftime('%d'))))
-print(j, m, d)
-print(int_delta)
-'''
+
 
 '''
 _CONST = 2 # такие константы, начинающиеся с нижнего подчеркивания нельзя импортировать в другой модуль
@@ -509,97 +501,7 @@ print(sorted(inventory, key=operator.itemgetter(1)))
 # [('orange', 1), ('banana', 2), ('apple', 3), ('pear', 5)]
 '''
 
-
-#word = word[:word.index(' ')]# Теперь Word это все символы до первого пробела
-
-
-
-
-
-
-
-#print("abc" in "abcba")
-#print("abce" in "abcba")
-#p = 'cabcd'
-#print(p.find('d'))
-#print("cabcd".find("abc", 1))  # индекс первого вхождения или -1
-#print("cabcd"[1:].find("abc"))
-#print(str.find.__doc__)
-
 '''
-s = 'asadfa'
-print(s[1:3])
-'''
-
-#print("cabcd".index("abc"))  # индекс первого вхождения или ValueError
-
-
-#s = "The woman in black fled across the desert, and the gunslinger followed"
-#print(s.startswith(("The woman", "The dog", "The man in black")))
-# print(s.startswith.__doc__)
-
-#s = "image.png"
-#print(s.endswith(".png"))
-
-#s = "abacaba"
-#print(s.find("aba", 0))
-#print(s.count("aba"))
-# print(s.count.__doc__)
-
-#print(s.rfind("aba"))
-
-#s = "The man in black fled across the desert, and the gunslinger followed"
-#print(s.lower())
-#print(s.upper())
-#print(s.count("the"))
-#print(s.lower().count("the"))
-
-#s = "1,2,3,4"
-#print(s)
-#print(s.replace(",", ", ", 2)) # заменим только два вхождения
-#print(s.replace.__doc__)
-
-#s = "1\t\t 2  3       4       "
-#print(list(map(int,(s.split()))))
-s = '1  2 3 4'
-#print(s.split(" ", 2))# только два разделения
-#print(s.split())
-
-# print(s.split.__doc__)
-
-#s = "_*__1, 2, 3, 4__*_"
-#print(repr(s.rstrip("*_")))
-#print(repr(s.lstrip("*_")))
-#print(repr(s.strip("*_")))
-#ss = '12558     '
-#ssa = ss.rstrip()
-#print(ssa)
-
-#numbers = map(str, [1, 2, 3, 4, 5])
-#print(repr(" ".join(numbers)))
-
-
-#capital = 'London is the capital of Great Britain'
-#template = '{} is the capital of {}'
-#print(template.format("London", "Great Britain"))
-#print(template.format("Vaduz", "Liechtenstein"))
-#print(template.format.__doc__)
-
-
-#template = '{capital} is the capital of {country}'
-#print(template.format(capital="London", country="Great Britain"))
-#print(template.format(country="Liechtenstein", capital="Vaduz"))
-
-'''
-import requests
-template = "Response from {0.url} with code {0.status_code}"
-#
-res = requests.get("https://docs.python.org/3.5/")
-print(template.format(res))
-#
-res = requests.get("https://docs.python.org/3.5/random")
-print(template.format(res))
-
 from random import random
 x = random()
 print(x)
@@ -654,19 +556,6 @@ print(fun(5))
 '''
 
 
-'''
-import os, os.path
-#(__file__) - текущий исполняемый файл
-current_dir = os.path.abspath(os.path.dirname(__file__))    # получаем путь к директории текущего исполняемого файла
-#print(current_dir)
-
-file_path = os.path.join(current_dir, 'file.txt')
-#print(file_path)
-print(os.path.abspath(__file__))
-
-print(os.path.dirname(__file__))
-
-'''
 
 '''
 f =3
@@ -722,27 +611,7 @@ status_code = 200
 ok = resp_status_code == status_code
 '''
 
-'''
-import csv
-with open('example.csv') as f:
-    reader = csv.reader(f)
-    for row in reader:
-        print(row)
 
-with open('example.csv') as f:
-    reader = csv.reader(f, delimitre="\t")
-    for row in reader:
-        print(row)
-students =  [
-    ["Greg", "Dean", 70,80,90,"Good job, Greg"],
-    ["Wirt", "Wood", 80, 80.2, 80, "Nicely Done"]
-]
-with open('example.csv', "a") as f:
-    writter = csv.writer(f)
-    #writter.writerows(students)
-    for student in students:
-        writter.writerow(student)
-'''
 
 '''
 import uuid
@@ -835,14 +704,7 @@ def test_timedistance_v1(a, b, expected):
     assert diff == expected
 '''
 
-'''
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-my_dict = {'apple': 1, 'banana': 2, 'cherry': 3}
-new_dict = {k: v for k, v in my_dict.items() if k != 'banana'}
 
-my_dict[None] = 5
-print(my_dict)
-'''
 
 '''
 from oop_examples import CC
@@ -1052,14 +914,9 @@ def f(d, x):
     return d
 print reduce(f, data, {}).values()
 '''
+
+
 '''
-import uuid
-session_id = str(uuid.uuid4())
-print(session_id)
-'''
-
-
-
 lst = [['45'], ['43'], ['35'], ['33'], ['29'], ['27'], ['45', ' 43', ' 35', ' 33', ' 29', ' 27']]
 lst2 = [['198', ' 193', ' 189', ' 184', ' 180', ' 177', ' 172']]
 
@@ -1090,37 +947,22 @@ def make_norm_list2(lst):
                 new_lst.append(item)
     return new_lst
 print(make_norm_list2(lst3))
+'''
+
+
+
 
 '''
-from datetime import datetime
+new_list = ['ноль', 1, [2.1, 'два и два'], 3, 'IV']
+del new_list[2]
+print(new_list)
 
-# Assuming supply_date is a datetime object
-supply_date = datetime.now()
-
-# Format the datetime object into a string with microseconds truncated to three decimal places
-supply_date_str = supply_date.strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
-
-print(supply_date_str)
-
-sorting_start_date = datetime.today().replace(day=1)
-print(sorting_start_date.strftime("%Y-%m-%d %H:%M:%S.%f")[:-3])
-
+new_list = ['ноль', 1, [2.1, 'два и два'], 3, 'IV']
+del new_list[1:4]
+print(new_list)
 '''
-import json
-from datetime import datetime
-sorting_start_date = datetime.today().replace(day=1)
-sorting_close_date = datetime.today()
-sorting_result = {
-            "CloseDate": sorting_close_date.strftime("%Y-%m-%dT%H:%M:%S"),
-            "StartDate": sorting_start_date.strftime("%Y-%m-%dT%H:%M:%S"),
-            "TotalWeight": 0,
-            "WeightByTask": {}
 
-        }
-print(sorting_result)
-print(str(sorting_result))
-sorting_result1 = str(sorting_result).replace("'", '"')
-sorting_result2 = json.dumps(sorting_result)
-print(sorting_result1)
-print(sorting_result2)
 
+import uuid
+session_id = str(uuid.uuid4())
+print(session_id)

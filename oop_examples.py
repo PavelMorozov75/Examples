@@ -923,7 +923,9 @@ a = A()
 print(a.__class__)
 print(a.__module__)
 print(__name__)
-
+print(a.__class__.__module__)
+#  не работает  print(a.__class__.__module__.__file__)
+#  не работает  print(a.__class__.__file__)
 
 class Options:
     def __init__(self):

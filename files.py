@@ -112,3 +112,39 @@ print(os.path.abspath('main.py'))
 #shutil.copy('test.txt', 'test25.txt')
 #shutil.copytree('test', 'test/test')# копируем каталог целиком
 '''
+
+'''
+import csv
+with open('example.csv') as f:
+    reader = csv.reader(f)
+    for row in reader:
+        print(row)
+
+with open('example.csv') as f:
+    reader = csv.reader(f, delimitre="\t")
+    for row in reader:
+        print(row)
+students =  [
+    ["Greg", "Dean", 70,80,90,"Good job, Greg"],
+    ["Wirt", "Wood", 80, 80.2, 80, "Nicely Done"]
+]
+with open('example.csv', "a") as f:
+    writter = csv.writer(f)
+    #writter.writerows(students)
+    for student in students:
+        writter.writerow(student)
+'''
+
+'''
+import os, os.path
+#(__file__) - текущий исполняемый файл
+current_dir = os.path.abspath(os.path.dirname(__file__))    # получаем путь к директории текущего исполняемого файла
+#print(current_dir)
+
+file_path = os.path.join(current_dir, 'file.txt')
+#print(file_path)
+print(os.path.abspath(__file__))
+
+print(os.path.dirname(__file__))
+
+'''
