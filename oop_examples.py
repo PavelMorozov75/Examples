@@ -919,6 +919,7 @@ class A:
 class B:
     pass
 
+'''
 a = A()
 print(a.__class__)
 print(a.__module__)
@@ -937,4 +938,26 @@ options_dict = vars(options)
 
 print(options_dict) # Output: {'attr1': 'value1', 'attr2': 'value2'}
 print(options.__dict__)
+'''
+
+class Person:
+    def __init__(self, name, surname):
+        self.name = name
+        self.surname = surname
+
+    @property
+    def full_name(self):
+        return self.name + ' ' + self.surname
+
+    # сеттер для свойства full_name
+    @full_name.setter
+    def full_name(self, new):
+        self.name, self.surname = new.split(' ')
+
+tom = Person('Thomas', 'Smith')
+tom.full_name  # 'Thomas Smith'
+tom.full_name = 'Alice Cooper'
+print(tom.name)  # 'Alice'
+print(tom.surname)  # 'Cooper'
+
 
