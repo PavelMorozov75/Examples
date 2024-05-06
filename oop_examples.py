@@ -354,7 +354,6 @@ human.my_dog.bark()       # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 human.print_human_name()
 '''
 
-'''
 class EvenLenghtMixin:
     # a = 6
     def even_lenght(self):
@@ -380,7 +379,7 @@ print('действительно родитель  ', issubclass(EvenLenghtMixi
 print('Дейстрвительно экземпляр класса', isinstance(x, Mylist))
 print(Mylist.__dict__)
 print(x.__dict__)
-'''
+
 
 '''
 from math import pi
@@ -427,8 +426,8 @@ print(b)
 print(b.fact())
 print(a.fact())
 print(b.area())
-
 '''
+
 
 '''
 class Minecraft:
@@ -913,18 +912,20 @@ for i in my_list:
     pass
 '''
 
-
+from examples import C
 class A:
     pass
 class B:
     pass
 
-'''
+
 a = A()
 print(a.__class__)
+print(C.__module__)
 print(a.__module__)
 print(__name__)
 print(a.__class__.__module__)
+print('C.__class__.__module__   ', C.__class__.__module__)
 #  не работает  print(a.__class__.__module__.__file__)
 #  не работает  print(a.__class__.__file__)
 
@@ -938,7 +939,8 @@ options_dict = vars(options)
 
 print(options_dict) # Output: {'attr1': 'value1', 'attr2': 'value2'}
 print(options.__dict__)
-'''
+print(Options.__dict__)
+
 
 class Person:
     def __init__(self, name, surname):
