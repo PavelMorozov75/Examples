@@ -1,4 +1,14 @@
 
+first, second, *other = [1,2,3,4,5,6,7]
+print(first)
+print(second)
+print(other)
+
+def sum_of_three(a, b, c):
+    return a + b + c
+three = [1, 2, 3]
+print(sum_of_three(*three))
+
 def print_ab(a, b=50):
     print(a)
     print(b)
@@ -40,3 +50,4 @@ def s(a, *vs, b=10):
 #print(s(b=31))
 #s(b=31, 0)
 print(s(11, 10, 10))
+

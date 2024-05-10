@@ -1,21 +1,7 @@
 class C:
     pass
 
-'''
-fib = lambda x : 1 if x <= 2 else fib(x - 1) + fib(x - 2)
-print(fib(31))
 
-f = lambda x : 1 if x < 2 else x*f(x-1)
-print(f(5))
-
-my_list = [1, 3, 4, 6, 10, 11, 15, 12, 14]
-new_list = list(filter(lambda x: (x%2 == 0) , my_list))
-print(new_list)
-
-current_list = [1, 3, 4, 6, 10, 11, 15, 12, 14]
-new_list = list(map(lambda x: x*2 , current_list))
-print(new_list)
-'''
 
 '''
 count = int(input('введите количество чисел   '))
@@ -132,82 +118,8 @@ n, k = map(int, input().split())
 print(C(n, k))
 '''
 
-'''
-ok_status = True
-vowles = ['a', 'e', 'u', 'i', 'o']
 
 
-def check_word(word):
-    #global ok_status
-    for i in vowles:
-        if i in word:
-            return True
-
-    ok_status = False
-    return False
-
-
-print(check_word('adace'))
-print(ok_status)
-print(check_word('www'))
-print(ok_status)
-
-'''
-
-'''
-ok_status = True
-vowles = ['a', 'e', 'u', 'i', 'o']
-def f():
-
-    ok_status = True
-    vowles = ['a', 'e', 'u', 'i', 'o']
-
-    def check_word(word):
-        #global ok_status
-        nonlocal ok_status
-        for i in vowles:
-            if i in word:
-                return True
-
-        ok_status = False
-        return False
-    print(check_word('adace'))
-    print(ok_status)
-    print(check_word('www'))
-    print(ok_status)
-
-f()
-print(ok_status)
-'''
-
-
-'''
-x, y = 1, 2
-#print(x)
-#print(y)
-def foo():
-    global y
-    if y == 2:
-        x = 2
-        print(x)
-        y = 1
-
-foo()
-print(x)
-if y == 1:
-    x = 3
-print(x)
-'''
-
-'''
-x = 1
-def foo():
-    #global x
-    x = 2
-    print(x)
-foo()
-print(x)
-'''
 
 '''
 lst = list()
@@ -284,17 +196,7 @@ print(next(map_obj))
 '''
 
 
-'''
-x = input().split()
-k = [int(i) for i in x]
-print(k)
-'''
 
-'''
-x = input().split()
-k, n = (int(i) for i in x)
-print(k+n)
-'''
 
 
 '''
@@ -841,7 +743,7 @@ new_list = ['ноль', 1, [2.1, 'два и два'], 3, 'IV']
 del new_list[1:4]
 print(new_list)
 '''
-
+'''
 from distutils import util
 
 def type_bool(x: str) -> bool:
@@ -850,6 +752,24 @@ def type_bool(x: str) -> bool:
 # Example usage
 print(type_bool("true"))  # Output: True
 print(type_bool("f"))  # Output: True
+'''
+
+
+'''
+parent = page = None
+print(parent, page)
+'''
+
+
+def identity(x):
+    return x
+
+f = identity
+for attribute in (f.__name__, f.__module__, f.__doc__, f.__class__):
+    print(attribute)
+
+
+
 
 import uuid
 session_id = str(uuid.uuid4())

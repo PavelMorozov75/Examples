@@ -1,3 +1,15 @@
+'''
+x = input().split()
+k = [int(i) for i in x]
+print(k)
+'''
+
+
+x = input().split()
+k, n = (int(i) for i in x)
+print(k+n)
+
+
 
 variable = [i*i for i in range(10) if i > 5]
 print(variable)

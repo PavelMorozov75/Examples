@@ -22,6 +22,35 @@ while True:
     except StopIteration:
         break
 
+'''
+class MyList:
+    def __init__(self):
+        self.data = [1, 2, 3]
+        self.index = 0
+
+    # объявите методы __iter__ и __next__
+    def __iter__(self):
+        print("Запустился __iter__")
+        return self
+
+    def __next__(self):
+        if self.index < len(self.data):
+            print("Запустился __next__")
+            dat = self.data[self.index]
+            self.index += 1
+        else:
+            raise StopIteration
+            pass
+        return dat
+
+
+# код ниже пожалуйста не меняйте
+my_list = MyList()
+for i in my_list:
+    pass
+'''
+
+
 
 
 

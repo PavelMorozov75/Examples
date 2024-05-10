@@ -354,6 +354,7 @@ human.my_dog.bark()       # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 human.print_human_name()
 '''
 
+'''
 class EvenLenghtMixin:
     # a = 6
     def even_lenght(self):
@@ -379,7 +380,7 @@ print('действительно родитель  ', issubclass(EvenLenghtMixi
 print('Дейстрвительно экземпляр класса', isinstance(x, Mylist))
 print(Mylist.__dict__)
 print(x.__dict__)
-
+'''
 
 '''
 from math import pi
@@ -884,51 +885,8 @@ for i in country_is:
         print(f'Ура, Маша летит в Казахстан!')
 '''
 
+
 '''
-class MyList:
-    def __init__(self):
-        self.data = [1, 2, 3]
-        self.index = 0
-
-    # объявите методы __iter__ и __next__
-    def __iter__(self):
-        print("Запустился __iter__")
-        return self
-
-    def __next__(self):
-        if self.index < len(self.data):
-            print("Запустился __next__")
-            dat = self.data[self.index]
-            self.index += 1
-        else:
-            raise StopIteration
-            pass
-        return dat
-
-
-# код ниже пожалуйста не меняйте
-my_list = MyList()
-for i in my_list:
-    pass
-'''
-
-from examples import C
-class A:
-    pass
-class B:
-    pass
-
-
-a = A()
-print(a.__class__)
-print(C.__module__)
-print(a.__module__)
-print(__name__)
-print(a.__class__.__module__)
-print('C.__class__.__module__   ', C.__class__.__module__)
-#  не работает  print(a.__class__.__module__.__file__)
-#  не работает  print(a.__class__.__file__)
-
 class Options:
     def __init__(self):
         self.attr1 = "value1"
@@ -940,26 +898,90 @@ options_dict = vars(options)
 print(options_dict) # Output: {'attr1': 'value1', 'attr2': 'value2'}
 print(options.__dict__)
 print(Options.__dict__)
+'''
+
+class MyClass:
+    def __new__(cls, *args, **kwargs):
+        print('Запустился __new__')
+        return super().__new__(cls)
+
+    def __init__(self):
+        print('Запустился __init__')
+
+my_instance = MyClass()
 
 
-class Person:
-    def __init__(self, name, surname):
+
+class StopNumber:
+
+    def __new__(cls, number, name):
+        # cls.number = number
+        # cls.name = name
+        if number > 1000:
+            return super().__new__(cls)
+        else:
+            pass
+
+    def __init__(self, number, name):
+        self.number = number
         self.name = name
-        self.surname = surname
 
-    @property
-    def full_name(self):
-        return self.name + ' ' + self.surname
+# Код ниже пожалуйста не меняйте
+Masha = StopNumber(500, 'Masha')
+Vika = StopNumber(1500, 'Vika')
+Lena = StopNumber(1200, 'Lena')
 
-    # сеттер для свойства full_name
-    @full_name.setter
-    def full_name(self, new):
-        self.name, self.surname = new.split(' ')
-
-tom = Person('Thomas', 'Smith')
-tom.full_name  # 'Thomas Smith'
-tom.full_name = 'Alice Cooper'
-print(tom.name)  # 'Alice'
-print(tom.surname)  # 'Cooper'
+print(isinstance(Masha, StopNumber))
+print(isinstance(Vika, StopNumber))
+print(isinstance(Lena, StopNumber))
 
 
+
+class StopNumber(int):
+
+    def __new__(cls, number):
+
+        if number > 1000:
+            return super().__new__(cls, number)
+        else:
+            pass
+
+    def __init__(self, number):
+        self.number = number
+
+
+# Код ниже пожалуйста не меняйте
+Masha = StopNumber(1500)
+print(isinstance(Masha, StopNumber))
+print(Masha.number)
+
+
+
+
+class ImmutableString(str):
+    def __new__(cls, value):
+        return super().__new__(cls, value.upper())
+
+s = ImmutableString("lalala")
+print(s)  # "HELLO"
+
+
+
+class StopNumber:
+    def __new__(cls, number, name):
+        if number > 1000:
+            return super().__new__(cls, number + 100, name)
+
+    # def __init__(self, number, name):
+    #     self.number = number
+    #     self.name = name
+
+
+# Код ниже пожалуйста не меняйте
+Masha = StopNumber(500, 'Masha')
+Vika = StopNumber(1500, 'Vika')
+Lena = StopNumber(1200, 'Lena')
+
+print(isinstance(Masha, StopNumber))
+print(isinstance(Vika, StopNumber))
+print(isinstance(Lena, StopNumber))
