@@ -563,7 +563,7 @@ print(res)
 print(res1)
 '''
 
-''''
+'''
 import pytest_testrail
 import pytest
 from pytest_testrail.plugin import pytestrail
@@ -664,8 +664,8 @@ def f(d, x):
     return d
 print (reduce(f, data, {}))
 #print (list(reduce(f, data, {}).values()))
-'''
 
+'''
 
 '''
 data = [{'id': 1, 'val':1, 'a': 'd'}, {'id': 2, 'val':3, 'a': 'b' }, {'id': 1, 'val':4, 'a': 'c'} ]
@@ -743,9 +743,16 @@ print(parent, page)
 '''
 
 
+def identity(x):
+    return x
 
-'''
+f = identity
+for attribute in (f.__name__, f.__module__, f.__doc__, f.__class__):
+    print(attribute)
+
+
+
+
 import uuid
 session_id = str(uuid.uuid4())
 print(session_id)
-'''
