@@ -1,3 +1,5 @@
+class CC:
+    pass
 
 '''
 class Holyday:
