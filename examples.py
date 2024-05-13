@@ -409,44 +409,12 @@ lst.sort()
 print(lst)
 '''
 
-'''
-a = [1, 2, 3]
-b = ["one", "two", "three"]
-
-for val1, val2 in zip(a, b):
-    print(val1, val2)
-
-for val1, val2 in enumerate(a):
-    print(val1, val2)
-'''
-
-
-
-from itertools import chain
-# Suppose we have the following dictionary:
-res = {
-    'key1': ['value1', 'value2'],
-    'key2': ['value3', 'value4', 'value5'],
-    'key3': ['value6']
-}
 
 
 
 
-length = len(list(chain(*list(res.values()))))
-print(res.values())
-print(list(res.values()))
-print(*list(res.values()))
-print(chain(*list(res.values())))
-print(list(chain(*list(res.values()))))
 
-'''
-from itertools import chain
-it1 = range(1, 6)
-it2 = range(10, 16)
-rez = chain(it1, it2)
-list(rez)
-'''
+
 
 '''
 from datetime import datetime
@@ -741,9 +709,55 @@ parent = page = None
 print(parent, page)
 '''
 
+'''
+from dataclasses import dataclass, asdict
+
+@dataclass
+class Option:
+    name: str
+    default_value: str
+    type: type
+    help: str
+
+# Create an Option object
+option = Option("BASE_URL", "", type=str, help="example help")
+
+# Convert the Option object to a dictionary and filter out None values
+option_dict = {k: v for k, v in asdict(option).items() if v is not None}
+
+print(option_dict)
+'''
+import argparse
+from dataclasses import dataclass
+
+# Define a dataclass to represent options
+@dataclass
+class Options:
+    name: str
+    age: int
+
+# Create an argparse parser
+parser = argparse.ArgumentParser(description="Example script")
+
+# Add arguments to the parser
+parser.add_argument("--name", type=str, help="Name of the person")
+parser.add_argument("--age", type=int, help="Age of the person")
+
+# Parse command-line arguments
+args = parser.parse_args(['Vasya'])
+
+# Convert the options object and the parsed arguments into dictionaries
+options_dict = vars(Options(name="John Doe", age=30))
+default_options = vars(args)
+
+print("Options:", options_dict)
+print("Default Options:", default_options)
+print(args)
+
 
 
 
 import uuid
 session_id = str(uuid.uuid4())
 print(session_id)
+
