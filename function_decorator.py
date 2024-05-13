@@ -85,6 +85,46 @@ def identity(x):
 print(identity(5))
 
 '''
+def memorized(func):
+    memory = {}
+    def wrapper(*args, ** kwargs):
+        key = (args, tuple(sorted(kwargs.items())))
+        if key not in memory:
+            memory[key] = func(*args, **kwargs)
+        return memory[key]
+    return wrapper
+
+def collatz_sequenze(n):
+    while n!= 1:
+        print(n)
+        n = (3*n + 1) if n % 2 else (n // 2)
+
+t = memorized(collatz_sequenze)
+print(t(22222222222222222222222))
+print(t(22222222222222222222222))
+'''
+
+def memorized_1(func):
+    memory = {}
+    def wrapper(*args, ** kwargs):
+        key = (args, tuple(sorted(kwargs.items())))
+        if key not in memory:
+            memory[key] = func(*args, **kwargs)
+        return memory[key]
+    return wrapper
+@timed
+@memorized_1
+def collatz_sequenze_1(n):
+    while n!= 1:
+        print(n)
+        n = (3*n + 1) if n % 2 else (n // 2)
+
+
+print(collatz_sequenze_1(22222222222222222222223))
+print(collatz_sequenze_1(22222222222222222222223))
+
+
+'''
 from time import time
 def timed(func):
     def timed_func(x, y):

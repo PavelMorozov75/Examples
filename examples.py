@@ -421,7 +421,7 @@ for val1, val2 in enumerate(a):
 '''
 
 
-"""
+
 from itertools import chain
 # Suppose we have the following dictionary:
 res = {
@@ -439,7 +439,6 @@ print(list(res.values()))
 print(*list(res.values()))
 print(chain(*list(res.values())))
 print(list(chain(*list(res.values()))))
-"""
 
 '''
 from itertools import chain
@@ -741,14 +740,6 @@ print(type_bool("f"))  # Output: True
 parent = page = None
 print(parent, page)
 '''
-
-
-def identity(x):
-    return x
-
-f = identity
-for attribute in (f.__name__, f.__module__, f.__doc__, f.__class__):
-    print(attribute)
 
 
 
