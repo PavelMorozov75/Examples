@@ -727,37 +727,15 @@ option_dict = {k: v for k, v in asdict(option).items() if v is not None}
 
 print(option_dict)
 '''
-import argparse
-from dataclasses import dataclass
+'''
+import os
+print(os.environ)
+# for key, value in os.environ.items():
+#     print(key, value)
+'''
 
-# Define a dataclass to represent options
-@dataclass
-class Options:
-    name: str
-    age: int
-
-# Create an argparse parser
-parser = argparse.ArgumentParser(description="Example script")
-
-# Add arguments to the parser
-parser.add_argument("--name", type=str, help="Name of the person")
-parser.add_argument("--age", type=int, help="Age of the person")
-
-# Parse command-line arguments
-args = parser.parse_args(['Vasya'])
-
-# Convert the options object and the parsed arguments into dictionaries
-options_dict = vars(Options(name="John Doe", age=30))
-default_options = vars(args)
-
-print("Options:", options_dict)
-print("Default Options:", default_options)
-print(args)
-
-
-
-
+'''
 import uuid
 session_id = str(uuid.uuid4())
 print(session_id)
-
+'''

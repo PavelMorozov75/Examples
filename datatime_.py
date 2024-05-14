@@ -3,6 +3,7 @@ from datetime import datetime
 
 # Assuming supply_date is a datetime object
 supply_date = datetime.now()
+print(supply_date)
 
 # Format the datetime object into a string with microseconds truncated to three decimal places
 supply_date_str = supply_date.strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]

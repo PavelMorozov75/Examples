@@ -1,4 +1,5 @@
-
+#https://stepik.org/lesson/63305/step/1
+#https://stepik.org/lesson/63306/step/1
 
 def identity(x):
     return x
@@ -83,6 +84,7 @@ def introduce(func):
 def identity(x):
     return x
 print(identity(5))
+print(identity.__name__)
 
 '''
 def memorized(func):
@@ -103,7 +105,7 @@ t = memorized(collatz_sequenze)
 print(t(22222222222222222222222))
 print(t(22222222222222222222222))
 '''
-
+'''
 def memorized_1(func):
     memory = {}
     def wrapper(*args, ** kwargs):
@@ -122,7 +124,7 @@ def collatz_sequenze_1(n):
 
 print(collatz_sequenze_1(22222222222222222222223))
 print(collatz_sequenze_1(22222222222222222222223))
-
+'''
 
 '''
 from time import time
@@ -140,3 +142,86 @@ def f1(x, y):
 t1_func = timed(f1)
 t1_func(2,3)
 '''
+
+'''
+call_count = 0
+def call_counter_hook(func):
+    def wrapper(*args, **kwargs):
+        global call_count
+        call_count += 1
+        return func(*args, **kwargs)
+
+    return wrapper
+
+@call_counter_hook
+def my_function():
+    print("Выполняется основная функция")
+
+
+for _ in range(5):
+    my_function()
+
+print(f"Функция вызвана {call_count} раз")  # Вывод: Функция вызвана 5 раз
+'''
+
+
+def make_wrapper_decorator(func):
+    def wrapper_decorator(wrap):
+        wrap.__name__ = func.__name__
+        wrap.__doc__ = func.__doc__
+        return wrap  # 3)возврат wrapper обратно во wrapper с переписанными аттрибутами
+
+    return wrapper_decorator
+
+
+def decorator(func):
+
+    #@make_wrapper_decorator(func)  # 2)wrapper = make_wrapper_decorator(func)(wrapper) т.е. =wrapper_decorator(wrapper)
+
+    wrapper_decorator = make_wrapper_decorator(func)   #
+
+    @wrapper_decorator
+    def wrapper(*args, **kwargs):
+        print(wrapper.__name__)  # div
+        args = reversed(args)
+        return func(*args, **kwargs)
+
+    return wrapper
+
+
+@decorator  # 1)здесь начало: div = flip(div)
+def div(x, y, show=False):
+    res = x / y
+    if show:
+        print(res)  # 2.0
+    return res
+
+
+div(2, 4, show=True)
+print(div.__name__)  # div
+
+
+
+
+import functools
+def decorator1(func):
+
+    @functools.wraps(func)  # 2)wrapper = make_wrapper_decorator(func)(wrapper) т.е. =wrapper_decorator(wrapper)
+    def wrapper(*args, **kwargs):
+        print(wrapper.__name__)  # div
+        args = reversed(args)
+        return func(*args, **kwargs)
+
+    return wrapper
+
+
+@decorator1  # 1)здесь начало: div = flip(div)
+def div(x, y, show=False):
+    res = x / y
+    if show:
+        print(res)  # 2.0
+    return res
+
+
+div(2, 10, show=True)
+print(div.__name__)  # div
