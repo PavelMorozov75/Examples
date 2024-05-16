@@ -58,14 +58,14 @@ print(isinstance(Lena, StopNumber))
 class StopNumber(int):
 
     def __new__(cls, number):
-
-        if number > 1000:
-            return super().__new__(cls, number)
+        cls.number = number
+        if cls.number > 1000:
+            return super().__new__(cls, cls.number)
         else:
             pass
 
-    def __init__(self, number):
-        self.number = number
+    # def __init__(self, number):
+    #     self.number = number
 
 
 # Код ниже пожалуйста не меняйте

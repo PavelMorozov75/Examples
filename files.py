@@ -135,7 +135,7 @@ with open('example.csv', "a") as f:
         writter.writerow(student)
 '''
 
-'''
+
 import os, os.path
 #(__file__) - текущий исполняемый файл
 current_dir = os.path.abspath(os.path.dirname(__file__))    # получаем путь к директории текущего исполняемого файла
@@ -147,4 +147,25 @@ print(os.path.abspath(__file__))
 
 print(os.path.dirname(__file__))
 
-'''
+import tempfile
+def create_download_dir(download_dir):
+    """Создание папки для загрузки файлов"""
+
+
+
+    os.makedirs(download_dir, exist_ok=True)
+    tmp_path = tempfile.mkdtemp(dir=download_dir)
+    os.chmod(tmp_path, 0o775)
+
+    return tmp_path
+
+# tmp_path = tempfile.mkdtemp(dir=download_path): Эта строка создает временный каталог внутри ранее созданного
+# download_pathкаталога. Функция mkdtemp генерирует уникальное имя временного каталога и создает его.
+# Параметр dir=download_pathуказывает, что временный каталог должен быть создан внутри download_path.
+
+# os.chmod(tmp_path, 0o775): Эта строка изменяет разрешения вновь созданного временного каталога на 0o775.
+# Функция chmodизменяет права доступа к файлу или каталогу.
+# Разрешение 0o775предоставляет права на чтение, запись и выполнение владельцу и группе,
+# а также разрешения на чтение и выполнение другим пользователям.
+# Это общий параметр разрешений для каталогов, доступ к которым должен быть обеспечен как владельцу, так и группе,
+# но при этом ограничивать доступ для других.

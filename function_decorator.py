@@ -225,3 +225,33 @@ def div(x, y, show=False):
 
 div(2, 10, show=True)
 print(div.__name__)  # div
+
+
+class Decorator:
+    def __init__(self, func):
+        self.func = func
+
+    def __call__(self, *args, **kwargs):
+        result = self.func(*args, **kwargs)
+        result *= 2
+        print(result)
+
+@Decorator
+def my_function(x, y):
+    return x + y
+
+my_function(10, 5)  # 30
+
+# Метод __call__ имеет один параметр (number) и делает подсчёт, через сколько лет экземпляру будет number лет.
+# В нашем случае, мы будем вставлять число 20. Метод возвращает результат (return).
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+        print(self(20))
+
+    def __call__(self, number):
+        return 20 - self.age
+
+masha = Person('Masha', 9)
+vasya = Person('Vasya', 19)

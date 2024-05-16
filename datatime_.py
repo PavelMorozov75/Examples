@@ -1,5 +1,6 @@
-
+import time
 from datetime import datetime
+
 
 # Assuming supply_date is a datetime object
 supply_date = datetime.now()
@@ -13,7 +14,13 @@ print(supply_date_str)
 sorting_start_date = datetime.today().replace(day=1)
 print(sorting_start_date.strftime("%Y-%m-%d %H:%M:%S.%f")[:-3])
 
-
+'''
+d = time.time()
+print(d)
+a = datetime.fromtimestamp(d/ 1000).strftime('%d-%m-%Y %H:%M:%S.%f')
+print(a)
+print(type(a))
+'''
 
 '''
 import json
