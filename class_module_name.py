@@ -1,20 +1,38 @@
 
 from examples import C
 class A:
-    pass
-class B:
-    pass
+    def __init__(self, x):
+        self.x = 3
+    def aaa(self):
+        pass
+
+class B(A, C):
+
+    c = str
+    def bbb(self):
+        self.z = str
 
 
-a = A()
+
+
+a = A(3)
+b = B(5)
 print(a.__class__)
 print(C.__module__)
 print(a.__module__)
 print(__name__)
 print(a.__class__.__module__)
-print('C.__class__.__module__   ', C.__class__.__module__)
+print('C.__class__.__module__   :', C.__class__.__module__)
+print("B.__mro__ :", B.__mro__)
+print('dir(B)   :', dir(B))
+
+a = B.__mro__
+for element in a:
+    for key, value in element.__dict__.items():
+        print(key, value)
 #  не работает  print(a.__class__.__module__.__file__)
 #  не работает  print(a.__class__.__file__)
+
 
 
 

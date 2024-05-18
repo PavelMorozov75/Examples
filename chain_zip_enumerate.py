@@ -17,8 +17,8 @@ res = {
 }
 
 
-
-
+print(res.items())
+print(list(res.items()))
 length = len(list(chain(*list(res.values()))))
 print(res.values())
 print(list(res.values()))
