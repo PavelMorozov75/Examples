@@ -189,7 +189,7 @@ def decorator(func):
     return wrapper
 
 
-@decorator  # 1)здесь начало: div = flip(div)
+@decorator  # 1)здесь начало: div = decorator(div)
 def div(x, y, show=False):
     res = x / y
     if show:
@@ -227,6 +227,20 @@ div(2, 10, show=True)
 print(div.__name__)  # div
 
 
+class Adder:
+    def __init__(self, x):
+        self.x = x
+
+    def __call__(self, y):
+        return self.x + y
+
+adder = Adder(5)
+result = adder(3)
+print(result)  # Вывод: 8
+
+
+
+
 class Decorator:
     def __init__(self, func):
         self.func = func
@@ -248,10 +262,137 @@ class Person:
     def __init__(self, name, age):
         self.name = name
         self.age = age
-        print(self(20))
+        print(self('25'))
 
     def __call__(self, number):
         return 20 - self.age
 
 masha = Person('Masha', 9)
 vasya = Person('Vasya', 19)
+
+class ReadingAccelerator:
+
+    # ваши методы
+    def __init__(self, f):
+        self.func = f
+
+    def __call__(self, *args, **kwargs):
+        ff = self.func(*args, **kwargs)
+        return ff * 3
+
+
+@ReadingAccelerator
+def masha_reading(page_number):
+    return page_number
+
+print(masha_reading(5))
+
+
+from selenium.webdriver.common.by import By
+def parent_element(by=None, selector=None):
+    """Декоратор для page
+    Ко всем элементам, объявленным внутри Page добавляется селектор внутри декоратора
+    """
+
+    if selector is None:
+        selector, by = by, By.CSS_SELECTOR
+
+    def class_decorator(clazz):
+        clazz.by = by
+        clazz.selector = selector
+        return clazz
+
+    return class_decorator
+
+
+@parent_element("[class*='header__Wrapper']")
+class Header:
+    """Шапка сайта"""
+
+    title = (By.CSS_SELECTOR, "[title='АЛРОСА']")
+    # back_btn = Button(By.CSS_SELECTOR, "[class*='back-button__Wrapper']", "Назад")
+    # avatar_btn = Button(By.CSS_SELECTOR, "[class*='avatar__StyledButton']", "Аватар")
+    # settings_button = Button(By.CSS_SELECTOR, "[class*='settings-button__StyledButton']", "Настройки")
+    # notification_btn = Button(By.CSS_SELECTOR, "[class*='notifications-button__StyledLink']", "Уведомления")
+    # notification_icon = Button(By.CSS_SELECTOR, "[class*='notifications-button__NotificationsIcon']", "Уведомления")
+
+h = Header()
+print(h.title)
+print(Header.__dict__)
+for key, value in Header.__dict__.items():
+    print(key, value)
+
+
+import time
+# это вспомогательный декоратор будет декорировать каждый метод класса, см. ниже
+def timeit(method):
+    def timed(*args, **kw):
+        ts = time.time()
+        result = method(*args, **kw)
+        te = time.time()
+        delta = (te - ts) * 1000
+        print(f'{method.__name__} выполнялся {delta:2.5f} ms')
+        return result
+    return timed
+
+def timeit_all_methods(cls):
+    class NewCls:
+        def __init__(self, *args, **kwargs):
+            # проксируем полностью создание класса
+            # как создали этот NewCls, также создадим и декорируемый класс
+            self._obj = cls(*args, **kwargs)
+        def __getattribute__(self, s):
+            try:
+                # папа, у меня есть атрибут s?
+                x = super().__getattribute__(s) #x = object.__getattribute__(self, s)
+            except AttributeError:
+                # нет сынок, это не твой атрибут
+                pass
+            else:
+                # да сынок, это твое
+                return x
+            # объект, значит у тебя должен быть атрибут s
+            attr = self._obj.__getattribute__(s)
+            # метод ли он?
+            if isinstance(attr, type(self.__init__)):
+                print(type(self.__init__)) #<class 'method'>
+                # да, обернуть его в измеритель времени
+                return timeit(attr)
+            else:
+                # не метод, что-то другое
+                return attr
+    return NewCls
+@timeit_all_methods
+class Foo:
+    def a(self):
+        print("метод a начался")
+        time.sleep(0.2)
+        print("метод a кончился")
+f = Foo()
+f.a()
+
+
+def add_prefix(prefix):
+    def class_decorator(class_to_decorate):
+        class DecoratedClass(class_to_decorate):
+            def __init__(self, *args, **kwargs):
+                super().__init__(*args, **kwargs)
+                self.prefix = prefix
+
+            def get_prefixed_name(self):
+                return self.prefix + self.name
+
+        return DecoratedClass
+
+    return class_decorator
+
+
+@add_prefix("Mr. ")
+class Person:
+    def __init__(self, name):
+        self.name = name
+
+
+person = Person("John")
+print(person.get_prefixed_name())  # вывод: Mr. John
+

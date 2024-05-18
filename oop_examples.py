@@ -483,7 +483,7 @@ class D(A, B, C):
 d = D()
 '''
 
-'''
+
 class User:
     def __init__(self, name):
         self.name = name
@@ -500,7 +500,7 @@ user3 = User("Spider")
 
 print(user1.name, user2.name, user3.name, sep='\n')
 
-'''
+
 
 '''
 class Person:
