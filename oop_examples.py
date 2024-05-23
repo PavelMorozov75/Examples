@@ -901,3 +901,19 @@ print(options_dict) # Output: {'attr1': 'value1', 'attr2': 'value2'}
 print(options.__dict__)
 print(Options.__dict__)
 '''
+
+class GuruPython:
+
+
+    '''Это документация класса GuruPython'''
+    def __init__(self, a, b):
+        '''Это конструктор класса GuruPython'''
+        self.a = a
+        self.b = b
+
+    def return_ab(self):
+        '''Это метод класса GuruPython'''
+        return self.a + self.b
+print(GuruPython.__doc__)
+print(GuruPython.__init__.__doc__)
+print(GuruPython.return_ab.__doc__)

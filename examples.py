@@ -739,3 +739,27 @@ import uuid
 session_id = str(uuid.uuid4())
 print(session_id)
 '''
+def line(n, newline):
+    aa = ('\n' if newline else ' ').join('Вася' * n)
+    return aa
+
+print(line(5, False))
+
+
+a = 1
+b = None
+print(f"Вариант 1 : a = {a}, b = {b} ")
+print(a and b is None)
+print(not (a and b is None), '\n')
+
+a = None
+b = 1
+print(f"Вариант 2 : a = {a}, b = {b} ")
+print(a and b is None)
+print(not (a and b is None), '\n')
+
+a = None
+b = None
+print(f"Вариант 3 : a = {a}, b = {b} ")
+print(a and b is None)
+print(not (a and b is None))

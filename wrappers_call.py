@@ -75,6 +75,21 @@ def f1(x, y):
 t1_func = timed(f1)
 t1_func(6, 3)
 
+#вариант без декоратора
+def introduce(func):
+    def wrapper(*args, **kwargs):
+        print('Function name ', func.__name__)
+        return func(*args, **kwargs)
+    return wrapper
+
+def identity(x):
+    return x
+aa = introduce(identity)
+
+print('вот оно  :', aa(8))
+print('identity.__name__ :', identity.__name__)
+
+#вариант с декоратором
 def introduce(func):
     def wrapper(*args, **kwargs):
         print('Function name ', func.__name__)
@@ -84,7 +99,9 @@ def introduce(func):
 def identity(x):
     return x
 print(identity(5))
-print(identity.__name__)
+print('identity.__name__ :', identity.__name__)
+
+
 
 '''
 def memorized(func):
@@ -163,6 +180,23 @@ for _ in range(5):
 
 print(f"Функция вызвана {call_count} раз")  # Вывод: Функция вызвана 5 раз
 '''
+
+def is_wrapper(wrapper, func):
+    wrapper.__name__ = func.__name__
+    wrapper.__doc__ = func.__doc__
+
+
+def decorator(func):
+
+
+    def wrapper(*args, **kwargs):
+        print(wrapper.__name__)  # div
+        args = reversed(args)
+        return func(*args, **kwargs)
+        is_wrapper(wrapper, func)
+    return wrapper
+
+
 
 
 def make_wrapper_decorator(func):
@@ -396,132 +430,18 @@ class Person:
 person = Person("John")
 print(person.get_prefixed_name())  # вывод: Mr. John
 
+def make_introduce(n):
+
+    def introduce(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            print('Function name ', (func.__name__ + '\n') * n)
+            return func(*args, **kwargs)
+        return wrapper
+    return introduce
+@make_introduce(5)
+def identity(x):
+    return x
 
 
-class ReadingAccelerator:
-
-    # ваши методы
-    def __init__(self, f):
-        self.func = f
-
-    def __call__(self, *args, **kwargs):
-        ff = self.func(*args, **kwargs)
-        return ff * 3
-
-
-@ReadingAccelerator
-def masha_reading(page_number):
-    return page_number
-
-print(masha_reading(5))
-
-
-from selenium.webdriver.common.by import By
-def parent_element(by=None, selector=None):
-    """Декоратор для page
-    Ко всем элементам, объявленным внутри Page добавляется селектор внутри декоратора
-    """
-    print('by  :', by)
-    print('selector', selector)
-    if selector is None:
-        selector, by = by, By.CSS_SELECTOR
-
-    def class_decorator(clazz):
-        clazz.by = by
-        clazz.selector = selector
-        return clazz
-
-    return class_decorator
-
-
-@parent_element("[class*='header__Wrapper']")
-class Header:
-    """Шапка сайта"""
-
-    title = (By.CSS_SELECTOR, "[title='АЛРОСА']")
-    # back_btn = Button(By.CSS_SELECTOR, "[class*='back-button__Wrapper']", "Назад")
-    # avatar_btn = Button(By.CSS_SELECTOR, "[class*='avatar__StyledButton']", "Аватар")
-    # settings_button = Button(By.CSS_SELECTOR, "[class*='settings-button__StyledButton']", "Настройки")
-    # notification_btn = Button(By.CSS_SELECTOR, "[class*='notifications-button__StyledLink']", "Уведомления")
-    # notification_icon = Button(By.CSS_SELECTOR, "[class*='notifications-button__NotificationsIcon']", "Уведомления")
-
-h = Header()
-print(h.title)
-print(Header.__dict__)
-for key, value in Header.__dict__.items():
-    print(key, value)
-
-
-import time
-# это вспомогательный декоратор будет декорировать каждый метод класса, см. ниже
-def timeit(method):
-    def timed(*args, **kw):
-        ts = time.time()
-        result = method(*args, **kw)
-        te = time.time()
-        delta = (te - ts) * 1000
-        print(f'{method.__name__} выполнялся {delta:2.5f} ms')
-        return result
-    return timed
-
-def timeit_all_methods(cls):
-    class NewCls:
-        def __init__(self, *args, **kwargs):
-            # проксируем полностью создание класса
-            # как создали этот NewCls, также создадим и декорируемый класс
-            self._obj = cls(*args, **kwargs)
-        def __getattribute__(self, s):
-            try:
-                # папа, у меня есть атрибут s?
-                x = super().__getattribute__(s) #x = object.__getattribute__(self, s)
-            except AttributeError:
-                # нет сынок, это не твой атрибут
-                pass
-            else:
-                # да сынок, это твое
-                return x
-            # объект, значит у тебя должен быть атрибут s
-            attr = self._obj.__getattribute__(s)
-            # метод ли он?
-            if isinstance(attr, type(self.__init__)):
-                print(type(self.__init__)) #<class 'method'>
-                # да, обернуть его в измеритель времени
-                return timeit(attr)
-            else:
-                # не метод, что-то другое
-                return attr
-    return NewCls
-@timeit_all_methods
-class Foo:
-    def a(self):
-        print("метод a начался")
-        time.sleep(0.2)
-        print("метод a кончился")
-f = Foo()
-f.a()
-
-
-def add_prefix(prefix):
-    def class_decorator(class_to_decorate):
-        class DecoratedClass(class_to_decorate):
-            def __init__(self, *args, **kwargs):
-                super().__init__(*args, **kwargs)
-                self.prefix = prefix
-
-            def get_prefixed_name(self):
-                return self.prefix + self.name
-
-        return DecoratedClass
-
-    return class_decorator
-
-
-@add_prefix("Mr. ")
-class Person:
-    def __init__(self, name):
-        self.name = name
-
-
-person = Person("John")
-print(person.get_prefixed_name())  # вывод: Mr. John
-
+print(identity(5))
