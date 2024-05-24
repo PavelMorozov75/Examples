@@ -763,3 +763,17 @@ b = None
 print(f"Вариант 3 : a = {a}, b = {b} ")
 print(a and b is None)
 print(not (a and b is None))
+
+
+def print_smth1(a):
+    print(a)
+
+def print_smth2(a, b):
+    print(a, b)
+
+actions = {1: print_smth1("text"),
+           2: print_smth2("text1", "text2")}
+
+s = 1
+action = actions.get(s)
+action()
