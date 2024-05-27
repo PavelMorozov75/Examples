@@ -1,4 +1,3 @@
-
 from examples import C
 class A:
     def __init__(self, x):
@@ -17,11 +16,11 @@ class B(A, C):
 
 a = A(3)
 b = B(5)
-print(a.__class__)
-print(C.__module__)
-print(a.__module__)
-print(__name__)
-print(a.__class__.__module__)
+print('a.__class__ :', a.__class__)
+print('C.__module__: ', C.__module__)
+print('a.__module__: ', a.__module__)
+print('__name__ : ', __name__)
+print('a.__class__.__module__: ', a.__class__.__module__)
 print('C.__class__.__module__   :', C.__class__.__module__)
 print("B.__mro__ :", B.__mro__)
 print('dir(B)   :', dir(B))

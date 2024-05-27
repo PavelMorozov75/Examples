@@ -1,6 +1,8 @@
 class CC:
     pass
 
+__all__ = [CC]
+
 '''
 class Holyday:
     pass
@@ -914,6 +916,78 @@ class GuruPython:
     def return_ab(self):
         '''Это метод класса GuruPython'''
         return self.a + self.b
-print(GuruPython.__doc__)
-print(GuruPython.__init__.__doc__)
-print(GuruPython.return_ab.__doc__)
+# print(GuruPython.__doc__)
+# print(GuruPython.__init__.__doc__)
+# print(GuruPython.return_ab.__doc__)
+
+
+class BankAccount:
+    def __init__(self, balance):
+        self.__balance = balance
+
+account = BankAccount(1500)
+print(account.__dict__)               # {'_BankAccount__balance': 1500}
+print(account._BankAccount__balance)  # 1500
+
+
+class Parent:
+
+    def __init__(self, y, a):
+        self.__y = y
+        self._a = a
+
+    def __parent_y(self):
+        print(self.__y)
+
+    def _pparent(self):
+        print(self._a)
+
+class Child(Parent):
+    def child__x(self):
+        print(self.__y)
+
+
+coordinate = Parent(5, 17)    # экземпляр дочернего класса
+print(coordinate.__dict__)
+
+coordinate._pparent()
+#coordinate.__parent_y() # невозможно вызвать приватный метод
+print(coordinate._Parent__y)  #
+
+
+class Bank:
+    def __init__(self, name, number, balance):
+        self._name = name
+        self._number = number
+        self._balance = balance
+
+    def print_balance(self):
+        print(self._balance)
+
+    def change_balance(self, money):
+        self._balance = self._balance + money
+
+id_1 = Bank('Vasya', 12345678, 1000)
+id_1.change_balance(-500)
+print(id_1.__dict__)
+id_1.print_balance()
+
+
+from accessify import private
+
+class MyClass:
+    a = 2
+    b = 3
+
+    @private
+    def private_sum_ab(self):
+        print(f"{self.a + self.b}")
+
+    def public_sum_ab(self):
+        self.private_sum_ab()
+
+obj = MyClass()
+obj.public_sum_ab()   # 5 - приватный метод можно вызвать из публичного
+# obj.private_sum_ab()  # AttributeError
+
+
