@@ -1,7 +1,8 @@
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from typing import Union
-driver = webdriver.Chrome()
+
 
 class BasePage:
 
@@ -17,7 +18,7 @@ class BasePage:
             if not isinstance(driver, WebDriver):
                 raise TypeError('В класс страницы передан не драйвер, а %s' % type(driver))
             self.driver: WebDriver = driver
-            self._base_url = "https://stellarburgers.nomoreparties.site/register"
+            self._base_url = "https://qa-scooter.praktikum-services.ru/"
             # self.browser: Browser = Browser(driver)
             self.init()
 
@@ -79,7 +80,7 @@ class HtmlElement:
         self.driver = driver
         self.parent = self.page = None
         if name:
-            self.set_name(name)
+            self._name = name
         if not self.absolute_position:
             self.page = page
 
@@ -91,3 +92,45 @@ class HtmlElement:
         self.create_child_items()
         if self.absolute_position:
             pass
+
+    def get_elements(self):
+        for key, value in self.__dict__.items():
+            if key not in ("page", "parent"):
+                yield key, value
+
+    def create_child_items(self):
+        """Создать дочерние элементы"""
+
+        for key, value in self.get_elements():
+            if issubclass(value.__class__, HtmlElement):
+                value.init(self.driver, parent=self, page=self.page)
+
+    def new_instance(self, driver, parent=None, page=None, name=''):
+        """Получение нового экземпляра элемента"""
+
+        if self._kwargs:
+            new_item = type(self)(self._by, self._by_selector, self._name,
+                                  **{k: v for k, v in self._kwargs})
+        else:
+            new_item = type(self)(self._by, self._by_selector, self._name)
+        new_item.init(driver, parent=parent or self.parent, page=page)
+
+        return new_item
+
+class Page(BasePage):
+
+    def __init__(self, driver, url):
+        self.url = url
+        super().__init__(driver)
+
+    aa = HtmlElement(By.XPATH, "(//button[contains (@class, 'Button_Button')])[1]")
+
+
+
+driver = webdriver.Chrome()
+url = "https://qa-scooter.praktikum-services.ru/"
+page = Page(driver, url)
+
+driver.quit()
+
+
