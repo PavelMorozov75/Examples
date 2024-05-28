@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from typing import Union
+import time
 
 
 class BasePage:
@@ -27,10 +28,12 @@ class BasePage:
          нужен из-за того что dir вычисляет свойства, а нам нужны только атрибуты класса"""
 
         for _class in self.__class__.__mro__:
+            print('_class mro', _class)
             for key, value in _class.__dict__.items():
                 if not key.startswith('_') and not isinstance(getattr(self.__class__, key), property):
                     value = getattr(self, key)
                     if isinstance(value, (HtmlElement, BasePage)):
+                        # print('key ', key, 'value ', value)
                         yield key, value
 
     def init(self):
@@ -40,13 +43,16 @@ class BasePage:
             if isinstance(cur_value, HtmlElement):
                 try:
                     setattr(self, key, cur_value.new_instance(driver=self.driver, page=self, name=key))
+                    # print('self', self, key, cur_value)
                 except Exception as error:
                     raise type(error)(f'Не смогли создать копию элемента\n'
                                       f'key: {key}\n'
                                       f'type: {type(cur_value)}\n'
                                       f'{repr(error)}')
             elif isinstance(cur_value, BasePage):
+                print('1111')
                 cur_value.__init__(self.driver)
+        print(self, self.__dict__)
 
         # PageDecorator.set_grid(self)
 
@@ -105,6 +111,7 @@ class HtmlElement:
             if issubclass(value.__class__, HtmlElement):
                 value.init(self.driver, parent=self, page=self.page)
 
+
     def new_instance(self, driver, parent=None, page=None, name=''):
         """Получение нового экземпляра элемента"""
 
@@ -114,22 +121,47 @@ class HtmlElement:
         else:
             new_item = type(self)(self._by, self._by_selector, self._name)
         new_item.init(driver, parent=parent or self.parent, page=page)
+        # print('new_item ', new_item)
 
         return new_item
 
 class Page(BasePage):
 
-    def __init__(self, driver, url):
-        self.url = url
+    def __init__(self, driver):
+        # self.url = url
+        self.driver = driver
         super().__init__(driver)
 
     aa = HtmlElement(By.XPATH, "(//button[contains (@class, 'Button_Button')])[1]")
+
+    @property
+    def get_base_url(self):
+        self.driver.get(self._base_url)
+
+class Page1(Page):
+    def __init__(self, driver, url):
+        self.url = url
+        self.driver = driver
+        super().__init__(driver)
+
+
 
 
 
 driver = webdriver.Chrome()
 url = "https://qa-scooter.praktikum-services.ru/"
-page = Page(driver, url)
+page = Page(driver)
+page.get_base_url
+page.get_elements()
+# print(page.__dict__)
+# print(page.aa)
+# print(page.aa.page)
+# print(page.aa.parent)
+
+page1 = Page1(driver, url)
+time.sleep(1)
+
+
 
 driver.quit()
 
