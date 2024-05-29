@@ -28,12 +28,15 @@ class BasePage:
          нужен из-за того что dir вычисляет свойства, а нам нужны только атрибуты класса"""
 
         for _class in self.__class__.__mro__:
-            print('_class mro', _class)
+            # print('_class mro', _class)
+            # print(_class.__dict__.items())
             for key, value in _class.__dict__.items():
+
                 if not key.startswith('_') and not isinstance(getattr(self.__class__, key), property):
                     value = getattr(self, key)
                     if isinstance(value, (HtmlElement, BasePage)):
                         # print('key ', key, 'value ', value)
+
                         yield key, value
 
     def init(self):
@@ -44,15 +47,17 @@ class BasePage:
                 try:
                     setattr(self, key, cur_value.new_instance(driver=self.driver, page=self, name=key))
                     # print('self', self, key, cur_value)
+                    pass
                 except Exception as error:
                     raise type(error)(f'Не смогли создать копию элемента\n'
                                       f'key: {key}\n'
                                       f'type: {type(cur_value)}\n'
                                       f'{repr(error)}')
             elif isinstance(cur_value, BasePage):
-                print('1111')
+                # print('1111')
                 cur_value.__init__(self.driver)
-        print(self, self.__dict__)
+                # cur_value.__init__()
+        # print(self, self.__dict__)
 
         # PageDecorator.set_grid(self)
 
@@ -82,7 +87,7 @@ class HtmlElement:
 
     def init(self, driver: WebDriver, parent=None, page=None, name='') -> None:
         """Инициализация элементов"""
-
+        print(parent, page, driver)
         self.driver = driver
         self.parent = self.page = None
         if name:
@@ -125,40 +130,62 @@ class HtmlElement:
 
         return new_item
 
+class HtmlList(HtmlElement):
+    pass
+
+
 class Page(BasePage):
 
     def __init__(self, driver):
         # self.url = url
         self.driver = driver
+        self.jj = 9
         super().__init__(driver)
 
-    aa = HtmlElement(By.XPATH, "(//button[contains (@class, 'Button_Button')])[1]")
+    # aa = HtmlElement(By.CSS_SELECTOR, "(//button[contains (@class, 'Button_Button')])[1]")
+    # kk = HtmlElement(By.XPATH, "(//button[contains (@class, 'Button_Button')])[1]")
+
+
+    cc = 555
 
     @property
     def get_base_url(self):
         self.driver.get(self._base_url)
 
 class Page1(Page):
+
+
     def __init__(self, driver, url):
         self.url = url
         self.driver = driver
         super().__init__(driver)
+        bb = BasePage(self.driver)
+        self.iii()
+        pp = HtmlList(By.XPATH, "(//button[contains (@class, 'Button_Button')])[1]", driver=self.driver)
 
 
+
+    def iii(self):
+        dd = BasePage() #не инициализирует, так как не аттрибут класса
+
+    uu = BasePage()#А вот сюда передаст драйвер и инициализирует
 
 
 
 driver = webdriver.Chrome()
 url = "https://qa-scooter.praktikum-services.ru/"
 page = Page(driver)
-page.get_base_url
-page.get_elements()
+# print(page.jj)
+# page.get_base_url
+# page.get_elements()
+page1 = Page1(driver, url)
 # print(page.__dict__)
 # print(page.aa)
 # print(page.aa.page)
 # print(page.aa.parent)
+# print(Page.__dict__)
+# ll = BasePage(driver)
 
-page1 = Page1(driver, url)
 time.sleep(1)
 
 
