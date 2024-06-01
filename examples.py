@@ -767,3 +767,10 @@ class C:
 
 __all__ = [C]
 
+from cssselect import GenericTranslator, SelectorError
+try:
+    expression = GenericTranslator().css_to_xpath('div.content')
+except SelectorError:
+    print('Invalid selector.')
+
+print(expression)

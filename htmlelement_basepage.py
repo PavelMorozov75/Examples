@@ -28,14 +28,14 @@ class BasePage:
          нужен из-за того что dir вычисляет свойства, а нам нужны только атрибуты класса"""
 
         for _class in self.__class__.__mro__:
-            # print('_class mro', _class)
+            print('_class mro', _class)
             # print(_class.__dict__.items())
             for key, value in _class.__dict__.items():
 
                 if not key.startswith('_') and not isinstance(getattr(self.__class__, key), property):
                     value = getattr(self, key)
                     if isinstance(value, (HtmlElement, BasePage)):
-                        # print('key ', key, 'value ', value)
+                        print('key ', key, 'value ', value)
 
                         yield key, value
 
@@ -75,6 +75,7 @@ class HtmlElement:
         if by_type is not None:
             self._by_selector = selector
         self.driver: WebDriver = kwargs.get("driver", None)
+        print('Это оно   : ', self.driver)
         self.parent = kwargs.get("parent")
         self.page = kwargs.get("page")
         self._name = name if name else self.__str__()
@@ -114,6 +115,7 @@ class HtmlElement:
 
         for key, value in self.get_elements():
             if issubclass(value.__class__, HtmlElement):
+                print('создан дочерний элемент')
                 value.init(self.driver, parent=self, page=self.page)
 
 
@@ -131,6 +133,7 @@ class HtmlElement:
         return new_item
 
 class HtmlList(HtmlElement):
+
     pass
 
 
@@ -141,9 +144,9 @@ class Page(BasePage):
         self.driver = driver
         self.jj = 9
         super().__init__(driver)
+        aa = HtmlElement(By.CSS_SELECTOR, "(//button[contains (@class, 'Button_Button')])[1]", driver=self.driver )
 
-    # aa = HtmlElement(By.CSS_SELECTOR, "(//button[contains (@class, 'Button_Button')])[1]")
-    # kk = HtmlElement(By.XPATH, "(//button[contains (@class, 'Button_Button')])[1]")
+    kk = HtmlElement(By.XPATH, "(//button[contains (@class, 'Button_Button')])[1]")
 
 
     cc = 555
@@ -169,12 +172,14 @@ class Page1(Page):
         dd = BasePage() #не инициализирует, так как не аттрибут класса
 
     uu = BasePage()#А вот сюда передаст драйвер и инициализирует
-
+    hh = HtmlElement(By.XPATH, "(//button[contains (@class, 'Button_Button')])[1]")
+    dd = HtmlList(By.XPATH, "(//button[contains (@class, 'Button_Button')])[1]")
 
 
 driver = webdriver.Chrome()
 url = "https://qa-scooter.praktikum-services.ru/"
 page = Page(driver)
+
 # print(page.jj)
 # page.get_base_url
 # page.get_elements()
@@ -187,6 +192,8 @@ page1 = Page1(driver, url)
 # ll = BasePage(driver)
 
 time.sleep(1)
+print(page.__dict__)
+print(page1.__dict__)
 
 
 
