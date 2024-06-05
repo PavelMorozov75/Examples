@@ -3,7 +3,11 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from typing import Union
 import time
+from typing import List, Dict, Tuple
+from selenium.webdriver.remote.webdriver import WebElement
+from typing import Union, Any, Callable, Type, List, Type
 
+from selenium.common.exceptions import WebDriverException, NoSuchElementException, StaleElementReferenceException
 
 class BasePage:
 
@@ -28,14 +32,14 @@ class BasePage:
          нужен из-за того что dir вычисляет свойства, а нам нужны только атрибуты класса"""
 
         for _class in self.__class__.__mro__:
-            print('_class mro', _class)
+            # print('_class mro', _class)
             # print(_class.__dict__.items())
             for key, value in _class.__dict__.items():
 
                 if not key.startswith('_') and not isinstance(getattr(self.__class__, key), property):
                     value = getattr(self, key)
                     if isinstance(value, (HtmlElement, BasePage)):
-                        print('key ', key, 'value ', value)
+                        # print('key ', key, 'value ', value)
 
                         yield key, value
 
@@ -61,6 +65,53 @@ class BasePage:
 
         # PageDecorator.set_grid(self)
 
+    def parent_func(self):
+        if self.by:
+            return DefaultSelector(self.by, self.selector)
+
+def find_elements(by_type: str, locator: str, webelement: WebElement) -> List[WebElement]:
+    """Поиск элементов в других элементах
+
+    :param by_type: стратегия поиска
+    :param locator: локатор
+    :param driver: драйвер
+    :param webelement: если ищем в родительском элементе
+    """
+
+    elements = webelement.find_elements(by_type, locator)
+
+    return elements
+
+
+def convert_to_css(by: str, selector: str) -> Tuple[str, str]:
+    """Конвертируем в css"""
+
+    templates: Dict[str, Tuple[str, str]] = {
+        By.ID: (By.CSS_SELECTOR, '[id="{0}"]'),
+        By.NAME: (By.CSS_SELECTOR, '[name="{0}"]'),
+        By.CLASS_NAME: (By.CSS_SELECTOR, '.{0}'),
+    }
+    res = templates.get(by)
+    if res:
+        how, template = res
+        selector = template.format(selector)
+    return by, selector
+
+class DefaultSelector:
+
+    def __str__(self):
+        return f'{self.by_type}: {self.selector}'
+
+    def __init__(self, by_type, selector):
+        self.by_type, self.selector = convert_to_css(by_type, selector)
+
+    def __call__(self, driver, webelement):
+        if self.selector:
+            return find_elements(self.by_type, self.selector, webelement)
+        else:
+            return [driver, ]
+
+
 class HtmlElement:
     """Base element"""
 
@@ -75,7 +126,7 @@ class HtmlElement:
         if by_type is not None:
             self._by_selector = selector
         self.driver: WebDriver = kwargs.get("driver", None)
-        print('Это оно   : ', self.driver)
+        # print('Это оно   : ', self.driver)
         self.parent = kwargs.get("parent")
         self.page = kwargs.get("page")
         self._name = name if name else self.__str__()
@@ -88,7 +139,7 @@ class HtmlElement:
 
     def init(self, driver: WebDriver, parent=None, page=None, name='') -> None:
         """Инициализация элементов"""
-        print(parent, page, driver)
+        # print(parent, page, driver)
         self.driver = driver
         self.parent = self.page = None
         if name:
@@ -104,6 +155,8 @@ class HtmlElement:
         self.create_child_items()
         if self.absolute_position:
             pass
+
+
 
     def get_elements(self):
         for key, value in self.__dict__.items():
@@ -132,9 +185,99 @@ class HtmlElement:
 
         return new_item
 
-class HtmlList(HtmlElement):
+    @property
+    def find_element(self):
+        if not self._find_element:
+            self._find_element = DefaultSelector(self._by, self._by_selector)
+        return self._find_element
 
-    pass
+    @find_element.setter
+    def find_element(self, value):
+        self._find_element = value
+
+        def add_parent(self, parent_element: 'HtmlElement') -> None:
+            """Добавляет родителя к текущему элементу
+            :param parent_element: HtmlElement
+            """
+
+            self.init(parent_element.driver, parent_element, page=parent_element.page)
+
+    def add_parent(self, parent_element: 'HtmlElement') -> None:
+        """Добавляет родителя к текущему элементу
+        :param parent_element: HtmlElement
+        """
+
+        self.init(parent_element.driver, parent_element, page=parent_element.page)
+
+    @property
+    def webelements(self) -> list:
+        """Получение списка элементов"""
+
+
+
+        elements_list = [self.find_element]
+        parent = self.parent
+        while parent:
+            elements_list.append(parent.find_element)
+            parent = parent.parent
+            if not parent:
+                break
+
+        if self.page and isinstance(self.page, BasePage):
+            func = self.page.parent_func()
+            if func:
+                elements_list.append(func)
+        return elements_list[::-1]
+
+    def element(self, by: str, selector: str = None, element_type = None):
+        """Получить дочерний элемент"""
+
+        if selector is None:
+            selector = by
+            by = By.CSS_SELECTOR
+
+        element_type = HtmlElement if element_type is None else element_type
+        child_element = element_type(by_type=by,
+                                     selector=selector,
+                                     name=self._name)
+        child_element.add_parent(self)
+
+        return child_element
+
+    def webelement(self, methods_list=None, return_list: bool = False) -> Any:
+        """Поиск webelement на странице"""
+
+        if not methods_list:
+            methods_list = self.webelements
+
+        webelements = []
+        end_time = time.time() + 20
+        while True:
+            assert self.driver, 'Не передан драйвер элементу'
+            current_webelement = self.driver
+            for method in methods_list:
+                try:
+                    webelements = method(self.driver, current_webelement)
+                    if webelements and len(webelements) > 0:
+                        current_webelement = webelements[0]
+                        continue
+                    else:
+                        break
+                except WebDriverException:
+                    break
+            else:
+                break
+
+            if time.time() > end_time:
+                raise NoSuchElementException(f'no such element: Unable to locate element: '
+                                             f'{{"method":"{self._by}","selector":"{self._by_selector}"}}')
+        return webelements if return_list else webelements[0]
+
+
+
+class HtmlList(HtmlElement):
+    nn = HtmlElement(By.CSS_SELECTOR, "(//button[contains (@class, 'Button_Button@@@@@')])[1]")
+
 
 
 class Page(BasePage):
@@ -144,7 +287,7 @@ class Page(BasePage):
         self.driver = driver
         self.jj = 9
         super().__init__(driver)
-        aa = HtmlElement(By.CSS_SELECTOR, "(//button[contains (@class, 'Button_Button')])[1]", driver=self.driver )
+        self.aa = HtmlElement(By.CSS_SELECTOR, "(//button[contains (@class, 'Button_Button@@@@@')])[1]", driver=self.driver )
 
     kk = HtmlElement(By.XPATH, "(//button[contains (@class, 'Button_Button')])[1]")
 
@@ -162,9 +305,9 @@ class Page1(Page):
         self.url = url
         self.driver = driver
         super().__init__(driver)
-        bb = BasePage(self.driver)
+        self.bb = BasePage(self.driver)
         self.iii()
-        pp = HtmlList(By.XPATH, "(//button[contains (@class, 'Button_Button')])[1]", driver=self.driver)
+        self.pp = HtmlList(By.XPATH, "(//button[contains (@class, 'Button_Button')])[1]333", driver=self.driver)
 
 
 
@@ -190,13 +333,14 @@ page1 = Page1(driver, url)
 # print(page.aa.parent)
 # print(Page.__dict__)
 # ll = BasePage(driver)
-
+listt = HtmlList(By.CSS_SELECTOR, "(//button[contains (@class, 'Button_Button')])[1]333", driver=driver)
 time.sleep(1)
 print(page.__dict__)
 print(page1.__dict__)
-
-
+print(page.aa.find_element)
+print(page.kk.find_element)
+print(page1.pp.find_element)
+print(page.kk.webelements)
 
 driver.quit()
-
 

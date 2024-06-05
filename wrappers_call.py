@@ -122,11 +122,12 @@ t = memorized(collatz_sequenze)
 print(t(22222222222222222222222))
 print(t(22222222222222222222222))
 '''
-'''
+
 def memorized_1(func):
     memory = {}
     def wrapper(*args, ** kwargs):
         key = (args, tuple(sorted(kwargs.items())))
+        print('key  :', key)
         if key not in memory:
             memory[key] = func(*args, **kwargs)
         return memory[key]
@@ -141,7 +142,7 @@ def collatz_sequenze_1(n):
 
 print(collatz_sequenze_1(22222222222222222222223))
 print(collatz_sequenze_1(22222222222222222222223))
-'''
+
 
 '''
 from time import time
@@ -180,6 +181,7 @@ for _ in range(5):
 
 print(f"Функция вызвана {call_count} раз")  # Вывод: Функция вызвана 5 раз
 '''
+
 
 def is_wrapper(wrapper, func):
     wrapper.__name__ = func.__name__

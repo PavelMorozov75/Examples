@@ -95,16 +95,19 @@ while True:
     else:
         break
 '''
+
 '''
+class NonPositiveError(Exception):
+    pass
 class PositiveList(list):
     def append(self, x):
         if x > 0:
-            super(PositiveList, self).append(x)
+            # super(PositiveList, self).append(x)
+            super().append(x)
         else:
-            raise NonePositiveError
+            raise NonPositiveError
 
-class NonPositiveError(Exception):
-    pass
+
 
 
 a = PositiveList()
@@ -112,3 +115,53 @@ a.append(3)
 print(a)
 a.append(-8)
 '''
+
+class BeautyTransform:
+
+    def __init__(self, height, weight=0):
+        self.height = height
+        self.weight = weight
+
+    def transformer(self):
+        try:
+            new_body = self.height / self.weight
+            print('Успешная трансформация')
+            return new_body
+        except ZeroDivisionError:
+            print('Лицо как в картине Крик, Эдварда Мунка')
+
+
+vasya = BeautyTransform(172, 70)
+nastya = BeautyTransform(100, 50)
+lena = BeautyTransform(50)
+
+vasya.transformer()
+nastya.transformer()
+lena.transformer()
+
+class BeautyTransform:
+    def __init__(self, height, weight):
+        self.height = height
+        self.weight = weight
+        self.result = "Божественная красота"
+
+    def transformer(self):
+        try:
+            self.new_body =  self.height / self.weight
+        except Exception:
+            self.result = "Индюк на три дня"
+        else:
+            print(f"Проверка прошла!", end=' ') #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        finally:
+            print(f"Результат: {self.result}")
+
+
+
+# Код ниже пожалуйста не меняйте, ради Васи
+nastya = BeautyTransform(100, 50)
+lena = BeautyTransform(50, 90)
+vasya = BeautyTransform(172, "Индюк")
+
+nastya.transformer()
+lena.transformer()
+vasya.transformer()

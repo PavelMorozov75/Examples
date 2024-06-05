@@ -991,3 +991,107 @@ obj.public_sum_ab()   # 5 - приватный метод можно вызва�
 # obj.private_sum_ab()  # AttributeError
 
 
+class Teleport:
+
+    @private
+    def __activator_teleport(self):
+        print("Активатор от телепорта у Машеньки под подушкой")
+
+    def mama_help(self):
+        self.__activator_teleport()
+
+vasya = Teleport()
+vasya.mama_help()
+
+class MagicBank:
+    def __init__(self, account, balance):
+        self.__account = account
+        self.__balance = balance
+
+    # ваши методы
+    @property
+    def happy_balance(self):
+        return self.__balance
+    @happy_balance.setter
+    def happy_balance(self, balance):
+        self.__balance = balance
+
+    @happy_balance.deleter
+    def happy_balance(self):
+        self.__balance = 0
+
+
+
+# Код проверки пожалуйста не удаляйте
+
+id_1 = MagicBank('Машенька', 500)
+print(id_1.happy_balance)
+
+id_1.happy_balance = 1000
+print(id_1.happy_balance)
+
+del id_1.happy_balance
+print(id_1.happy_balance)
+
+
+
+
+class Person:
+    message_counter = 0
+    # объявите ваш метод
+
+    def print_number_of_messages(self):
+        print(self.message_counter)
+
+id_1 = Person()
+id_2 = Person()
+
+id_1.message_counter = 5
+id_2.message_counter = 10
+
+# ваш код вызова метода:
+id_1.print_number_of_messages()
+id_2.print_number_of_messages()
+
+class Person:
+    message_counter = 13
+    # объявите ваш метод
+    @classmethod
+    def print_number_of_messages(cls):
+        print(cls.message_counter)
+
+    def print_number_of_messages_1(self):
+        print(self.message_counter)
+
+
+id_1 = Person()
+id_2 = Person()
+
+id_1.message_counter = 5
+id_2.message_counter = 10
+
+# ваш код вызова метода:
+id_1.print_number_of_messages()
+id_2.print_number_of_messages()
+
+id_1.print_number_of_messages_1()
+id_2.print_number_of_messages_1()
+
+class NewJournal:
+
+    def set_attr(self, papa, mama, deda, baba):
+        self.papa = papa
+        self.mama = mama
+        self.deda = deda
+        self.baba = baba
+        self.count_money = self.papa + self.mama + self.deda + self.baba
+
+    def check_money(self):
+        if self.count_money < 80:
+            print('Денег не хватает')
+        else:
+            print('Ура, денег хватает!')
+
+masha = NewJournal()
+masha.set_attr(10, 20, 30, 40)
+masha.check_money()

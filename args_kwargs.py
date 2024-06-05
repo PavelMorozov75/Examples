@@ -51,3 +51,24 @@ def s(a, *vs, b=10):
 #s(b=31, 0)
 print(s(11, 10, 10))
 
+
+
+def aa(*args, **kwargs):
+    print(args)
+    print(kwargs)
+
+a = {'c': 1, 'b': 7, 'z': 38 ,'a': 25}
+b = {k : v for k, v in a.items()}
+c = [1,3,4,5]
+
+aa(*c, **a)
+
+
+def wrapper(*args, **kwargs):
+    key = (args, (sorted(kwargs.items())))
+    print(key)
+
+a = {'c': 1, 'b': 7, 'z': 38 ,'a': 25}
+c = [1,5,4,7]
+wrapper(*c, **a)
+wrapper(1, 10, 25, a=56, c=2)

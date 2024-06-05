@@ -4,7 +4,7 @@ vowles = ['a', 'e', 'u', 'i', 'o']
 
 
 def check_word(word):
-    # global ok_status
+    #global ok_status
     for i in vowles:
         if i in word:
             return True
@@ -19,7 +19,7 @@ print(check_word('www'))
 print(ok_status)
 '''
 
-
+'''
 def f():
     ok_status = True
     vowles = ['a', 'e', 'u', 'i', 'o']
@@ -39,6 +39,7 @@ def f():
 
 f()
 print(ok_status)
+'''
 
 ok_status = True
 def f():
