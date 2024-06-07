@@ -485,7 +485,7 @@ class D(A, B, C):
 d = D()
 '''
 
-
+'''
 class User:
     def __init__(self, name):
         self.name = name
@@ -501,7 +501,7 @@ user2 = User("Bat")
 user3 = User("Spider")
 
 print(user1.name, user2.name, user3.name, sep='\n')
-
+'''
 
 
 '''
@@ -904,6 +904,7 @@ print(options.__dict__)
 print(Options.__dict__)
 '''
 
+
 class GuruPython:
 
 
@@ -920,7 +921,7 @@ class GuruPython:
 # print(GuruPython.__init__.__doc__)
 # print(GuruPython.return_ab.__doc__)
 
-
+'''
 class BankAccount:
     def __init__(self, balance):
         self.__balance = balance
@@ -928,8 +929,9 @@ class BankAccount:
 account = BankAccount(1500)
 print(account.__dict__)               # {'_BankAccount__balance': 1500}
 print(account._BankAccount__balance)  # 1500
+'''
 
-
+'''
 class Parent:
 
     def __init__(self, y, a):
@@ -953,8 +955,9 @@ print(coordinate.__dict__)
 coordinate._pparent()
 #coordinate.__parent_y() # невозможно вызвать приватный метод
 print(coordinate._Parent__y)  #
+'''
 
-
+'''
 class Bank:
     def __init__(self, name, number, balance):
         self._name = name
@@ -971,8 +974,9 @@ id_1 = Bank('Vasya', 12345678, 1000)
 id_1.change_balance(-500)
 print(id_1.__dict__)
 id_1.print_balance()
+'''
 
-
+'''
 from accessify import private
 
 class MyClass:
@@ -989,8 +993,10 @@ class MyClass:
 obj = MyClass()
 obj.public_sum_ab()   # 5 - приватный метод можно вызвать из публичного
 # obj.private_sum_ab()  # AttributeError
+'''
 
-
+'''
+from accessify import private
 class Teleport:
 
     @private
@@ -1032,10 +1038,10 @@ print(id_1.happy_balance)
 
 del id_1.happy_balance
 print(id_1.happy_balance)
+'''
 
 
-
-
+'''
 class Person:
     message_counter = 0
     # объявите ваш метод
@@ -1052,31 +1058,64 @@ id_2.message_counter = 10
 # ваш код вызова метода:
 id_1.print_number_of_messages()
 id_2.print_number_of_messages()
+'''
+
 
 class Person:
+
     message_counter = 13
-    # объявите ваш метод
+
     @classmethod
     def print_number_of_messages(cls):
-        print(cls.message_counter)
+        print('@classmethod cls.message_counter до:', cls.message_counter)
+        cls.message_counter -= 1
+        print('@classmethod cls.message_counter после:', cls.message_counter)
+
+
+    def print_static(cls):
+        cls.print_number_of_messages()
+
 
     def print_number_of_messages_1(self):
         print(self.message_counter)
+        # Person.print_number_messages()#classmethod в методе так не прокатывает в обычном методе
+        # cls.print_number_messages()  # classmethod в методе так не прокатывает
+        self.print_number_messages_2()#staticmethod
+        Person.print_number_messages_2()#staticmethod
+
+    @staticmethod
+    def print_number_messages_2():
+        print(25)
 
 
 id_1 = Person()
-id_2 = Person()
-
 id_1.message_counter = 5
-id_2.message_counter = 10
-
-# ваш код вызова метода:
-id_1.print_number_of_messages()
-id_2.print_number_of_messages()
-
+Person.print_number_of_messages()# вызов метода класса
+id_1.print_number_of_messages()#вызов метода класса через экземпляр
 id_1.print_number_of_messages_1()
-id_2.print_number_of_messages_1()
+id_1.print_number_messages_2()# вызов статического метода через класс
 
+
+'''
+class MyClass:
+    name = "Hello"
+
+    @classmethod
+    def set_attr(cls, new_name):
+        cls.name = new_name
+
+    @classmethod
+    def get_attr(cls):
+        print(cls.name)
+
+
+MyClass.get_attr()  # выводит значение атрибута name, то есть "Hello"
+
+MyClass.set_attr("Vasya")  # Переименовал атрибут name в классе на значение "Vasya"
+print(MyClass.name)  # Vasya
+'''
+
+'''
 class NewJournal:
 
     def set_attr(self, papa, mama, deda, baba):
@@ -1095,3 +1134,81 @@ class NewJournal:
 masha = NewJournal()
 masha.set_attr(10, 20, 30, 40)
 masha.check_money()
+'''
+
+'''
+class GPS:
+    distance1 = ("Москва", "Екатеринбург", 1860)
+    distance2 = ("Москва", "Казань", 840)
+    distance3 = ("Москва", "Нижний Новгород", 430)
+
+    # ваш метод
+    def count_distance(self, point1, point2):
+        if point1 == point2:
+            print(0)
+        else:
+            for route in [self.distance1, self.distance2, self.distance3]:
+                if (point1 in route) and (point2 in route):
+                    print(route[2])
+                    break
+            else:
+                print("Извините, программа ещё в разработке")
+#Напомню, else в цикле выполняется всегда в конце всех итераций, если в цикле не активировался break!!!!!!
+# код ниже пожалуйста не удаляйте
+dis1 = GPS()
+dis2 = GPS()
+dis3 = GPS()
+
+dis1.count_distance("Москва", "Казань")
+dis2.count_distance("Екатеринбург", "Москва")
+dis2.count_distance("Казань", "Казань")
+dis3.count_distance("Нижний Новгород", "Екатеринбург")
+'''
+
+'''
+# ваш код:
+class Counter:
+
+    count = 0
+    @classmethod
+    def add_count(cls, add=1):
+        cls.count += add
+    @classmethod
+    def set_zero(cls):
+        cls.count = 0
+
+# код ниже пожалуйста не удаляйте
+Counter.add_count()
+print(Counter.count)
+Counter.set_zero()
+print(Counter.count)
+Counter.add_count(110)
+Counter.add_count()
+print(Counter.count)
+'''
+
+# ваш код:
+class MagicBank:
+    money = 1000
+
+    @classmethod
+    def add_money(cls):
+        cls.money = 1000
+        print('Ваш счёт снова равен 1000', end='\n\n')#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    @classmethod
+    def reduce_money(cls, amount):
+        if amount > 1000:
+            print('Нельзя тратить больше 1000 за один раз')
+        else:
+            print(f'Покупка на сумму {amount} осуществлена')
+            cls.add_money()
+
+
+
+
+# код ниже пожалуйста не удаляйте
+masha = MagicBank()
+masha.reduce_money(100)   #вызвали через экземпляр метод класса !!!!!!!!!!!!!!!!
+masha.reduce_money(999)
+masha.reduce_money(1000000000)

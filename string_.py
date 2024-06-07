@@ -89,3 +89,18 @@ print(template.format(res))
 res = requests.get("https://docs.python.org/3.5/random")
 print(template.format(res))
 '''
+
+# Есть список строк
+x = ['возвращает True',
+    'если строка str',
+    'начинается указанным',
+    'префиксом prefix']
+
+# Нужны строки, которые начинаются на префиксы
+prefix = ('если', 'преф')
+
+for item in x:
+    if item.startswith(prefix):
+        print('YES =>', item)
+    else:
+        print('NOT =>', item)
