@@ -2,6 +2,8 @@ class Person:
 
     message_counter = 13
 
+    dict_all = {'name': 'Vasya', 'age': 15}
+
     @classmethod
     def print_number_of_messages(cls):
         print('@classmethod cls.message_counter до:', cls.message_counter)
@@ -25,7 +27,12 @@ class Person:
         print(25)
 
 id_1 = Person()
+
 id_1.message_counter = 5
+id_2 = Person()
+print('id_2.message_counter :', id_2.message_counter)#13 !!!!
+
+
 id_1.print_static()
 Person.print_number_of_messages()# вызов метода класса через класс
 id_1.print_number_of_messages()#вызов метода класса через экземпляр
@@ -33,6 +40,16 @@ id_1.print_number_of_messages_1()#вызов обычного метода
 id_1.print_number_messages_2()# вызов статического метода через экземпляр
 
 
+#print(id_1.name) не срабатывает, аттрибута name нет !!!!!
+id_1.__dict__ = Person.dict_all
+print('id_1.name :', id_1.name)#Vasya - теперь срабатывает!!!
+id_1.name = 'Sonja'
+id_2.__dict__ = Person.dict_all
+
+print('id_1.age :', id_1.age) #15
+print('id_2.name', id_2.name)# 'Sonja' !!!!!!!!!!!!!! а не Vasya !!!!!!!!!!!
+print('id_1.message_counter  :', id_1.message_counter)#хоть и присвоили экземпляру новый dict аттрибут message_counter остался !!!
+print(Person.dict_all) #{'name': 'Sonja', 'age': 15}
 '''
 class Person:
     @classmethod
@@ -152,7 +169,7 @@ vasya.calculate_fuel_costs(3, 7, 50)
 vasya.calculate_fuel_costs(100, 7, 50)
 vasya.calculate_fuel_costs(50, 7, 50)
 '''
-
+'''
 from datetime import datetime
 
 # ваш код:
@@ -180,5 +197,5 @@ expiry_date3 = "2024-01-12"
 Product.check_date(today_date, expiry_date1)
 Product.check_date(today_date, expiry_date2)
 Product.check_date(today_date, expiry_date3)
-
+'''
 

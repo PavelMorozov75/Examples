@@ -671,10 +671,8 @@ print(os.environ)
 #     print(key, value)
 '''
 
-'''
-import uuid
-session_id = str(uuid.uuid4())
-print(session_id)
+
+
 '''
 def line(n, newline):
     aa = ('\n' if newline else ' ').join('Вася' * n)
@@ -705,7 +703,9 @@ class C:
     pass
 
 __all__ = [C]
+'''
 
+'''
 from cssselect import GenericTranslator, SelectorError
 try:
     expression = GenericTranslator().css_to_xpath('div.content')
@@ -713,3 +713,9 @@ except SelectorError:
     print('Invalid selector.')
 
 print(expression)
+'''
+
+
+import uuid
+session_id = str(uuid.uuid4())
+print(session_id)

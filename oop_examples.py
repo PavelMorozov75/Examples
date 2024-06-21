@@ -1077,4 +1077,56 @@ dis3.count_distance("Нижний Новгород", "Екатеринбург")
 
 
 
+names = {'id_1':'Masha', 'id_2':'Tom Cruise', 'id_3':'Nicole Kidman',
+         'id_4':'Brad Pitt', 'id_5':'Tom Hanks', 'id_6':'Johnny Depp'}
+class Person:
+    pass
+
+vasya = Person()
+# for key, value in names.items():
+#     setattr(vasya, key, value)
+vasya.__dict__.update(names)# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+# напишите ваш код:
+
+
+# код ниже пожалуйста не удаляйте
+for key, value in vasya.__dict__.items():
+    print(key, value)
+
+class Person:
+    def __init__(self, name, age, study, work):
+        self.name = name
+        self.age = age
+        self.study = study
+        self.work = work
+
+id_1 = Person('Vasya', 22, 'college', 'developer')
+print(id_1.__dict__)
+
+class Buildings:
+    def __init__(self, x, y):
+        # ваш код
+        if not self.check_build (x, y):
+            self.x = x
+            self.y = y
+        else:
+            pass
+
+    def check_build(self, x, y):
+        # ваш код
+        if x in (1, 200, 500, 1920) or y in (1, 300, 600, 1080):
+            print('Объект в этом месте невозможен')
+            return True
+        print('Объект построен')
+        return False
+
+
+# код ниже пожалуйста не удаляйте
+kitchen = Buildings(20, 800)
+living_room = Buildings(400, 500)
+garage = Buildings(900, 600)
+print(hasattr(garage, 'x'))  #!!!!!!!!!!!!!!!!!!!!!! атрибут в кавычках !!!!!
+forge = Buildings(1920, 280)
+dining_room = Buildings(300, 500)
 
