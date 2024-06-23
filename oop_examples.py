@@ -1076,7 +1076,7 @@ dis3.count_distance("Нижний Новгород", "Екатеринбург")
 '''
 
 
-
+'''
 names = {'id_1':'Masha', 'id_2':'Tom Cruise', 'id_3':'Nicole Kidman',
          'id_4':'Brad Pitt', 'id_5':'Tom Hanks', 'id_6':'Johnny Depp'}
 class Person:
@@ -1103,7 +1103,11 @@ class Person:
 
 id_1 = Person('Vasya', 22, 'college', 'developer')
 print(id_1.__dict__)
+'''
 
+
+
+'''
 class Buildings:
     def __init__(self, x, y):
         # ваш код
@@ -1129,4 +1133,4 @@ garage = Buildings(900, 600)
 print(hasattr(garage, 'x'))  #!!!!!!!!!!!!!!!!!!!!!! атрибут в кавычках !!!!!
 forge = Buildings(1920, 280)
 dining_room = Buildings(300, 500)
-
+'''
