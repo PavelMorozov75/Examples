@@ -875,7 +875,7 @@ print(account.__dict__)               # {'_BankAccount__balance': 1500}
 print(account._BankAccount__balance)  # 1500
 '''
 
-'''
+
 class Parent:
 
     def __init__(self, y, a):
@@ -899,7 +899,6 @@ print(coordinate.__dict__)
 coordinate._pparent()
 #coordinate.__parent_y() # невозможно вызвать приватный метод
 print(coordinate._Parent__y)  #
-'''
 
 '''
 class Bank:

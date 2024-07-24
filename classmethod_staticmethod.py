@@ -16,11 +16,18 @@ class Person:
 
 
     def print_number_of_messages_1(self):
-        print(self.message_counter)# через self можно обратиться к переменной класса
+        print('\n', 'вызов обычного метода')
+        print('message_counter', self.message_counter) # через self можно обратиться к переменной класса
+        self.message_counter = self.message_counter + 2 # в экземпляре
+        Person.message_counter = Person.message_counter + 1 # в классе, меняем у всех экземпляров
+        print('message_counter', self.message_counter)# через self можно обратиться к переменной класса
+        print('Person.message_counter  ', Person.message_counter)
+        print('message_counter', self.message_counter)
         # Person.print_number_messages()#classmethod в методе так не прокатывает в обычном методе
         # cls.print_number_messages()  # classmethod в методе так не прокатывает
         self.print_number_messages_2()#staticmethod
         Person.print_number_messages_2()#staticmethod
+        self.print_number_of_messages()
 
     @staticmethod
     def print_number_messages_2():
@@ -28,7 +35,7 @@ class Person:
 
 id_1 = Person()
 
-id_1.message_counter = 5
+#id_1.message_counter = 5
 id_2 = Person()
 print('id_2.message_counter :', id_2.message_counter)#13 !!!!
 
@@ -37,11 +44,20 @@ id_1.print_static()
 Person.print_number_of_messages()# вызов метода класса через класс
 id_1.print_number_of_messages()#вызов метода класса через экземпляр
 id_1.print_number_of_messages_1()#вызов обычного метода
-id_1.print_number_messages_2()# вызов статического метода через экземпляр
+Person.message_counter = 77
 
+print('id_1.message_counter  :', id_1.message_counter)
+id_1.print_number_messages_2()# вызов статического метода через экземпляр
+print(id_1.__dict__)
+print(id_2.__dict__)
+
+print('id_1.message_counter  :', id_1.message_counter)
 
 #print(id_1.name) не срабатывает, аттрибута name нет !!!!!
 id_1.__dict__ = Person.dict_all
+
+
+
 print('id_1.name :', id_1.name)#Vasya - теперь срабатывает!!!
 id_1.name = 'Sonja'
 id_2.__dict__ = Person.dict_all
@@ -198,4 +214,45 @@ Product.check_date(today_date, expiry_date1)
 Product.check_date(today_date, expiry_date2)
 Product.check_date(today_date, expiry_date3)
 '''
+class MyClass:
+    class_attribute = "Hello"
+
+    @classmethod
+    def say_hello(cls):
+        print(cls.class_attribute)
+
+MyClass.say_hello()         # Выводит "Hello"
+
+my = MyClass()
+my.class_attribute = "hi"   # Создали атрибут class_attribute в экземпляре my
+
+my.say_hello()              # Выводит всё равно "Hello"
+MyClass.class_attribute = 'hihi'
+my.say_hello()# Выводит 'hihi'
+print(my.class_attribute)# Выводит 'hi'
+my1 = MyClass()
+print(my1.class_attribute)# Выводит 'hihi'
+
+
+class Car:
+    # создаем атрибуты класса
+    car_count = 0
+
+    # создаем методы класса
+    def start(self, name, make, model):
+        print("Двигатель заведен")
+        self.name = name
+        self.make = make
+        self.model = model
+        Car.car_count += 1
+
+car_a = Car()
+car_a.start("Corrola", "Toyota", 2015)
+print(car_a.name)
+print(car_a.car_count)
+
+car_b = Car()
+car_b.start("City", "Honda", 2013)
+print(car_b.name)
+print(car_b.car_count)
 
