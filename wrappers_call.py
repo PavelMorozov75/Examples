@@ -55,7 +55,7 @@ def composition(f, g):
         return f(g(x))
     return h
 h = composition(lambda x: x**2, lambda x: x + 1)
-print(h(5))
+print('h(5) ', h(5))
 
 
 
@@ -123,6 +123,7 @@ print(t(22222222222222222222222))
 print(t(22222222222222222222222))
 '''
 
+'''
 def memorized_1(func):
     memory = {}
     def wrapper(*args, ** kwargs):
@@ -142,7 +143,7 @@ def collatz_sequenze_1(n):
 
 print(collatz_sequenze_1(22222222222222222222223))
 print(collatz_sequenze_1(22222222222222222222223))
-
+'''
 
 '''
 from time import time

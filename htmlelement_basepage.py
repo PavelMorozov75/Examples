@@ -31,9 +31,11 @@ class BasePage:
         """Получение потенциально элементов из класса
          нужен из-за того что dir вычисляет свойства, а нам нужны только атрибуты класса"""
 
+        # print(self.__class__.__mro__)
         for _class in self.__class__.__mro__:
+            # print(self, self.__class__)
             # print('_class mro', _class)
-            # print(_class.__dict__.items())
+            #print(_class.__dict__.items())
             for key, value in _class.__dict__.items():
 
                 if not key.startswith('_') and not isinstance(getattr(self.__class__, key), property):
@@ -59,6 +61,7 @@ class BasePage:
                                       f'{repr(error)}')
             elif isinstance(cur_value, BasePage):
                 # print('1111')
+                # print(cur_value)
                 cur_value.__init__(self.driver)
                 # cur_value.__init__()
         # print(self, self.__dict__)
@@ -127,6 +130,7 @@ class HtmlElement:
             self._by_selector = selector
         self.driver: WebDriver = kwargs.get("driver", None)
         # print('Это оно   : ', self.driver)
+        # print(self)
         self.parent = kwargs.get("parent")
         self.page = kwargs.get("page")
         self._name = name if name else self.__str__()
@@ -161,12 +165,16 @@ class HtmlElement:
     def get_elements(self):
         for key, value in self.__dict__.items():
             if key not in ("page", "parent"):
+                # print('key ', key)
+                # print('value ', value)
                 yield key, value
 
     def create_child_items(self):
         """Создать дочерние элементы"""
 
         for key, value in self.get_elements():
+            print('value', value, type(value), 'key ', key)
+            print('value.__class__', value.__class__)
             if issubclass(value.__class__, HtmlElement):
                 print('создан дочерний элемент')
                 value.init(self.driver, parent=self, page=self.page)
@@ -298,6 +306,9 @@ class Page(BasePage):
     def get_base_url(self):
         self.driver.get(self._base_url)
 
+
+
+
 class Page1(Page):
 
 
@@ -305,14 +316,15 @@ class Page1(Page):
         self.url = url
         self.driver = driver
         super().__init__(driver)
-        self.bb = BasePage(self.driver)
+        self.bb = BasePage()
         self.iii()
         self.pp = HtmlList(By.XPATH, "(//button[contains (@class, 'Button_Button')])[1]333", driver=self.driver)
 
 
 
     def iii(self):
-        dd = BasePage() #не инициализирует, так как не аттрибут класса
+        ll = BasePage()
+        return ll #не инициализирует, так как не аттрибут класса
 
     uu = BasePage()#А вот сюда передаст драйвер и инициализирует
     hh = HtmlElement(By.XPATH, "(//button[contains (@class, 'Button_Button')])[1]")
@@ -321,26 +333,30 @@ class Page1(Page):
 
 driver = webdriver.Chrome()
 url = "https://qa-scooter.praktikum-services.ru/"
-page = Page(driver)
+#page = Page(driver)
 
 # print(page.jj)
 # page.get_base_url
 # page.get_elements()
 page1 = Page1(driver, url)
+
 # print(page.__dict__)
 # print(page.aa)
 # print(page.aa.page)
 # print(page.aa.parent)
 # print(Page.__dict__)
-# ll = BasePage(driver)
+ll = BasePage(driver)
 listt = HtmlList(By.CSS_SELECTOR, "(//button[contains (@class, 'Button_Button')])[1]333", driver=driver)
 time.sleep(1)
-print(page.__dict__)
+# print(page.__dict__)
 print(page1.__dict__)
-print(page.aa.find_element)
-print(page.kk.find_element)
-print(page1.pp.find_element)
-print(page.kk.webelements)
+print(listt.__dict__)
+# print(Page1.uu.driver)
+# print(page1.bb.driver)
+# print(page.aa.find_element)
+# print(page.kk.find_element)
+# print(page1.pp.find_element)
+# print(page.kk.webelements)
 
 driver.quit()
 

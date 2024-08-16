@@ -7,7 +7,7 @@ print(other)
 def sum_of_three(a, b, c):
     return a + b + c
 three = [1, 2, 3]
-print(sum_of_three(*three))
+print('sum_of_three ', sum_of_three(*three))
 
 def print_ab(a, b=50):
     print(a)
@@ -62,6 +62,7 @@ b = {k : v for k, v in a.items()}
 c = [1,3,4,5]
 
 aa(*c, **a)
+print('b ', b)
 
 
 def wrapper(*args, **kwargs):
@@ -71,4 +72,4 @@ def wrapper(*args, **kwargs):
 a = {'c': 1, 'b': 7, 'z': 38 ,'a': 25}
 c = [1,5,4,7]
 wrapper(*c, **a)
-wrapper(1, 10, 25, a=56, c=2)
+wrapper(1, 10, 25, c=56, a=2)

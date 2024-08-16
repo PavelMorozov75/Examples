@@ -556,10 +556,12 @@ print(f2(lst2))
 
 
 '''
-from functools import reduce
+from functools import reduce #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 data = [{'id': 'a', 'val': 1, 'a': 7}, {'id': 'b', 'val':3, 'a': 9 }, {'id': 'a', 'val':4, 'a': 14}, {'id': 'b', 'val': 8, 'a': 50 }, {'d': 'b', 'val': 8, 'a': 50}  ]
 def f(d, x):
     k = x.get('id')
+    print('d', d)
+    print('x', x)
     if k in d:
         d[k]['val'] += x['val']
         d[k]['a'] += x['a']
@@ -568,8 +570,8 @@ def f(d, x):
     return d
 print (reduce(f, data, {}))
 #print (list(reduce(f, data, {}).values()))
-
 '''
+
 
 '''
 data = [{'id': 1, 'val':1, 'a': 'd'}, {'id': 2, 'val':3, 'a': 'b' }, {'id': 1, 'val':4, 'a': 'c'} ]
@@ -620,15 +622,7 @@ print(make_norm_list2(lst3))
 
 
 
-'''
-new_list = ['ноль', 1, [2.1, 'два и два'], 3, 'IV']
-del new_list[2]
-print(new_list)
 
-new_list = ['ноль', 1, [2.1, 'два и два'], 3, 'IV']
-del new_list[1:4]
-print(new_list)
-'''
 '''
 from distutils import util
 
@@ -679,7 +673,7 @@ def line(n, newline):
     return aa
 
 print(line(5, False))
-
+'''
 
 a = 1
 b = None
@@ -698,10 +692,17 @@ b = None
 print(f"Вариант 3 : a = {a}, b = {b} ")
 print(a and b is None)
 print(not (a and b is None))
-print(None and True)
+
+print('\n')
+print(None and True)#None
+print(None and False)#None
+print(None or True)#True
+print(not None)#True
 class C:
     pass
 
+
+'''
 __all__ = [C]
 '''
 
@@ -715,7 +716,28 @@ except SelectorError:
 print(expression)
 '''
 
+#print('туториал', 'по', 'функции', 'print()', sep='\n\n') #sep - символ между словами
+'''
+import string, random
+def generate_name(length):
+    all_symbols = string.ascii_letters
+    name = ''.join(random.choice(all_symbols) for _ in range(length))
+    return name
+
+print(generate_name(7))
+'''
 
 import uuid
+from random import randint
 session_id = str(uuid.uuid4())
 print(session_id)
+
+
+
+count_rooms = 1
+roomlist = [{"id": str(uuid.uuid4()), "name": randint(100, 999), "isActive": True} for i in range(count_rooms)]
+print(roomlist)
+
+
+print(11%12)
+print(13//13)
