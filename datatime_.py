@@ -1,7 +1,7 @@
 import time
 from datetime import datetime
 
-
+'''
 # Assuming supply_date is a datetime object
 supply_date = datetime.now()
 print(supply_date)
@@ -13,6 +13,7 @@ print(supply_date_str)
 
 sorting_start_date = datetime.today().replace(day=1)
 print(sorting_start_date.strftime("%Y-%m-%d %H:%M:%S.%f")[:-3])
+'''
 
 '''
 d = time.time()
@@ -51,3 +52,13 @@ print (int(new_date.strftime('%Y')), int(new_date.strftime('%m')), int((new_date
 print(j, m, d)
 print(int_delta)
 '''
+
+from datetime import datetime, timedelta, timezone
+
+# Obtain the current date and time in UTC+3 timezone
+#current_time_utc3 = datetime.now(tz=timezone(timedelta(hours=3)))
+current_time_utc3 = datetime.now()
+# Format the datetime object as a string showing hours and minutes
+formatted_time = current_time_utc3.strftime("%H:%M")
+
+print(formatted_time)
