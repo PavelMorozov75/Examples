@@ -675,6 +675,7 @@ def line(n, newline):
 print(line(5, False))
 '''
 
+'''
 a = 1
 b = None
 print(f"Вариант 1 : a = {a}, b = {b} ")
@@ -700,7 +701,7 @@ print(None or True)#True
 print(not None)#True
 class C:
     pass
-
+'''
 
 '''
 __all__ = [C]
@@ -735,9 +736,13 @@ print(session_id)
 
 
 count_rooms = 1
-roomlist = [{"id": str(uuid.uuid4()), "name": randint(100, 999), "isActive": True} for i in range(count_rooms)]
+roomlist = [{"id": str(uuid.uuid4()), "name": randint(100, 999), "isActive": True} for _ in range(count_rooms)]
 print(roomlist)
 
-
+'''
 print(11%12)
 print(13//13)
+'''
+a = 25.22
+
+print(type(a))
