@@ -733,16 +733,22 @@ from random import randint
 session_id = str(uuid.uuid4())
 print(session_id)
 
-
-
+'''
 count_rooms = 1
 roomlist = [{"id": str(uuid.uuid4()), "name": randint(100, 999), "isActive": True} for _ in range(count_rooms)]
 print(roomlist)
+'''
 
 '''
 print(11%12)
 print(13//13)
 '''
-a = 25.22
-
-print(type(a))
+'''
+from sys import getdefaultencoding
+print(getdefaultencoding()) # utf-8
+my_bytes = 'котобус cat'.encode()
+print(my_bytes)#b'\xd0\xba\xd0\xbe\xd1\x82\xd0\xbe\xd0\xb1\xd1\x83\xd1\x81 cat'
+print(my_bytes.decode())
+# 'котобус cat
+# print(my_bytes.decode('ascii', errors='surrogateescape'))
+'''

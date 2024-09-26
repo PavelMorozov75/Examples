@@ -18,6 +18,12 @@ print_ab(**args)
 print_ab(*args)
 print_ab(*lst)
 
+def print_abc (*aargs):
+
+    print('additional arguments ')
+    for arg in aargs:
+        print(arg)
+print_abc(1)
 
 
 
