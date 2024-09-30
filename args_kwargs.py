@@ -18,12 +18,25 @@ print_ab(**args)
 print_ab(*args)
 print_ab(*lst)
 
-def print_abc (*aargs):
+def print_abc (*aargs): #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     print('additional arguments ')
     for arg in aargs:
         print(arg)
 print_abc(1)
+ll = [33,34,35]
+print(ll)
+print(*ll)
+
+def print_abcd(**kwargs): #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    print('additional arguments ')
+    for key in kwargs:
+        print(key, kwargs[key])
+
+print_abcd(c=85, d=87, e=88)
+dd = {"c": 3, "d": 25}
+print_abcd(**dd)
+
 
 
 
@@ -45,6 +58,7 @@ def print_abcd (a, b , **kwargs):
         print(key, kwargs[key])
 print_abcd(10, 20, c=85, d=87, e=88)
 print_abcd(10, c=85, d=87, e=88, b=1)
+
 
 
 def s(a, *vs, b=10):

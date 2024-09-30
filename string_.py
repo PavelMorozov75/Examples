@@ -15,10 +15,10 @@
 #print("cabcd"[1:].find("abc"))
 #print(str.find.__doc__)
 
-'''
+
 s = 'asadfa'
 print(s[1:3])
-'''
+
 
 #print("cabcd".index("abc"))  # индекс первого вхождения или ValueError
 

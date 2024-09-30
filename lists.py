@@ -31,3 +31,10 @@ res = [{'rooms': [], "id":25}, {'rooms': [], "id": 7}]
 string = "/api/metrologist/cabinets"
 string = string.split("/")
 print(string)
+
+day_offs = ['суббота', 'воскресенье']
+workdays =['понедельник', 'вторник', 'среда', 'четверг', 'пятница']
+weekends = ['пятница','суббота','воскресенье']
+
+res = [*day_offs, *[x for x in weekends if x not in workdays]]
+print(res)
