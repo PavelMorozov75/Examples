@@ -93,3 +93,22 @@ a = {'c': 1, 'b': 7, 'z': 38 ,'a': 25}
 c = [1,5,4,7]
 wrapper(*c, **a)
 wrapper(1, 10, 25, c=56, a=2)
+
+day_offs = ['суббота', 'воскресенье']
+workdays =['понедельник', 'вторник', 'среда', 'четверг', 'пятница']
+weekends = ['пятница','суббота','воскресенье']
+
+res = [*day_offs, *[x for x in weekends if x not in workdays]]
+print(res)
+
+list1 =['Петя', 'Вася', 'Сережа']
+emploee = 'Павел'
+
+def print_emploee(*emploees):
+    print(emploees)
+    # for emploee in emploees:
+    #     print(emploee)
+
+print_emploee(*list1, emploee)
+print_emploee((*list1, emploee))
+print_emploee(list1)

@@ -413,7 +413,7 @@ print(100//13)
 print(100%13)
 '''
 
-'''
+
 from random import randint, choice
 seq_sum = 200
 quantity = 7
@@ -439,7 +439,7 @@ for i in range(len(result) // 2):
 
 print(tuple(result))
 print(sum(result))
-'''
+
 
 '''
 from random import randint

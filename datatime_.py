@@ -58,6 +58,7 @@ from datetime import datetime, timedelta, timezone
 # Obtain the current date and time in UTC+3 timezone
 #current_time_utc3 = datetime.now(tz=timezone(timedelta(hours=3)))
 current_time_utc3 = datetime.now()
+print(current_time_utc3)
 # Format the datetime object as a string showing hours and minutes
 formatted_time = current_time_utc3.strftime("%H:%M")
 

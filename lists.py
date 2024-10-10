@@ -18,7 +18,9 @@ print(new_list)
 
 string = "trtrtr/ytyt/ytyt/r"
 a = string.split("/")
+b = string.strip("/")
 print(a)
+print(b)
 # b = *string.split("/")
 def aaa(a,b,c,d):
     return a+b+c+d
