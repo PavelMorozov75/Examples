@@ -31,7 +31,7 @@ class BasePage:
         """Получение потенциально элементов из класса
          нужен из-за того что dir вычисляет свойства, а нам нужны только атрибуты класса"""
 
-        # print(self.__class__.__mro__)
+        print(self.__class__.__mro__)
         for _class in self.__class__.__mro__:
             # print(self, self.__class__)
             # print('_class mro', _class)
@@ -129,8 +129,8 @@ class HtmlElement:
         if by_type is not None:
             self._by_selector = selector
         self.driver: WebDriver = kwargs.get("driver", None)
-        # print('Это оно   : ', self.driver)
-        # print(self)
+        print('Это оно   : ', self.driver)
+        print(self)
         self.parent = kwargs.get("parent")
         self.page = kwargs.get("page")
         self._name = name if name else self.__str__()
@@ -173,10 +173,10 @@ class HtmlElement:
         """Создать дочерние элементы"""
 
         for key, value in self.get_elements():
-            print('value', value, type(value), 'key ', key)
-            print('value.__class__', value.__class__)
+            # print('value', value, type(value), 'key ', key)
+            # print('value.__class__', value.__class__)
             if issubclass(value.__class__, HtmlElement):
-                print('создан дочерний элемент')
+                # print('создан дочерний элемент')
                 value.init(self.driver, parent=self, page=self.page)
 
 
