@@ -19,7 +19,7 @@ print(check_word('www'))
 print(ok_status)
 '''
 
-'''
+
 def f():
     ok_status = True
     vowles = ['a', 'e', 'u', 'i', 'o']
@@ -39,7 +39,7 @@ def f():
 
 f()
 print(ok_status)
-'''
+
 
 ok_status = True
 def f():
@@ -106,7 +106,6 @@ if y == 1:
 print(x)
 '''
 
-'''
 x = 1
 def foo():
     #global x
@@ -114,4 +113,19 @@ def foo():
     print(x)
 foo()
 print(x)
-'''
+
+y = []
+def bbb():
+    for i in range(5):
+        y.append(i)
+
+bbb()
+print(y)
+
+y = []
+def bbb(h):
+    for i in range(5):
+        h.append(i)
+
+bbb(y)
+print(y)

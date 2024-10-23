@@ -106,9 +106,10 @@ emploee = 'Павел'
 
 def print_emploee(*emploees):
     print(emploees)
-    # for emploee in emploees:
-    #     print(emploee)
+    for emploee in emploees:
+        print(emploee)
 
 print_emploee(*list1, emploee)
 print_emploee((*list1, emploee))
 print_emploee(list1)
+print_emploee(emploee)
