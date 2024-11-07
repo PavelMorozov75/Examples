@@ -675,7 +675,7 @@ def line(n, newline):
 print(line(5, False))
 '''
 
-'''
+
 a = 1
 b = None
 print(f"Вариант 1 : a = {a}, b = {b} ")
@@ -699,11 +699,13 @@ print(None and True)#None
 print(None and False)#None
 print(None or True)#True
 print(not None)#True
-class C:
-    pass
-'''
 
 '''
+class C:
+    pass
+
+
+
 __all__ = [C]
 '''
 
@@ -752,3 +754,5 @@ print(my_bytes.decode())
 # 'котобус cat
 # print(my_bytes.decode('ascii', errors='surrogateescape'))
 '''
+a = [('458',)]
+b = a[0]

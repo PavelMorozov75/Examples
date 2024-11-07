@@ -129,8 +129,8 @@ class HtmlElement:
         if by_type is not None:
             self._by_selector = selector
         self.driver: WebDriver = kwargs.get("driver", None)
-        print('Это оно   : ', self.driver)
-        print(self)
+        # print('Это оно   : ', self.driver)
+        # print(self)
         self.parent = kwargs.get("parent")
         self.page = kwargs.get("page")
         self._name = name if name else self.__str__()
@@ -176,7 +176,7 @@ class HtmlElement:
             # print('value', value, type(value), 'key ', key)
             # print('value.__class__', value.__class__)
             if issubclass(value.__class__, HtmlElement):
-                # print('создан дочерний элемент')
+                print('создан дочерний элемент')
                 value.init(self.driver, parent=self, page=self.page)
 
 
@@ -298,6 +298,7 @@ class Page(BasePage):
         self.aa = HtmlElement(By.CSS_SELECTOR, "(//button[contains (@class, 'Button_Button@@@@@')])[1]", driver=self.driver )
 
     kk = HtmlElement(By.XPATH, "(//button[contains (@class, 'Button_Button')])[1]")
+    kk1 = HtmlList(By.XPATH, "(//button[contains (@class, 'Button_Button')])[1]111")
 
 
     cc = 555

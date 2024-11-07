@@ -22,7 +22,7 @@ while True:
     except StopIteration:
         break
 
-'''
+
 class MyList:
     def __init__(self):
         self.data = [1, 2, 3]
@@ -48,10 +48,6 @@ class MyList:
 my_list = MyList()
 for i in my_list:
     pass
-'''
-
-
-
 
 
 '''

@@ -23,3 +23,14 @@ current_list = [1, 3, 4, 6, 10, 11, 15, 12, 14]
 new_list = list(map(lambda x: x*2 , current_list))
 print(new_list)
 '''
+
+def create_tuple(a, b):
+    return a, b
+
+# функция `map()` останавливается, когда
+# заканчивается самая короткая последовательность
+x = map(create_tuple, ['a', 'b'], [3, 4, 5])
+print(tuple(x))
+x = map(create_tuple, ['a', 'b'], [3, 4, 5])
+print(dict(x))
+# {'a': 3, 'b': 4}

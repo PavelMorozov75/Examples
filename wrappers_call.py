@@ -446,5 +446,25 @@ def make_introduce(n):
 def identity(x):
     return x
 
-
 print(identity(5))
+
+
+
+
+
+import inspect
+
+def url(link: str):
+    def decorate(clazz):
+        clazz._url = link
+        return clazz
+    return decorate
+
+
+class Url(object):
+    @staticmethod
+    def has_url_decorator(obj):
+        source = inspect.getsource(obj)
+        result = source.find(url.__name__)
+        return result >= 0
+

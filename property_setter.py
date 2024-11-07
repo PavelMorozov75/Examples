@@ -66,5 +66,6 @@ class Car:
         return "Год выпуска модели " + str(self.model)
 
 
-carA = Car(2088)
+carA = Car(2019)
+print(carA.model)
 print(carA.getCarModel())
