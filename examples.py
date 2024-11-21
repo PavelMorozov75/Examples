@@ -756,3 +756,7 @@ print(my_bytes.decode())
 '''
 a = [('458',)]
 b = a[0]
+
+boxes = [2, 2] #список изложниц с количеством камней
+stones_count = sum(boxes)
+print(stones_count)

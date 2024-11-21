@@ -137,3 +137,21 @@ print(list(zip(s,t)))
 
 for val1, val2 in enumerate(a):
     print(val1, val2)
+
+
+
+ll = ((99, 89, 97),)
+a = list(*chain(ll))
+print(a)
+
+ll = ((99, 89, 97),)
+a = list(chain(*ll))
+print(a)
+
+ll = ((99, 89, 97), (25, 17))
+a = list(chain(*ll))
+print(a)
+
+ll = ((99, 89, 97))
+a = list(chain(ll))
+print(a)
