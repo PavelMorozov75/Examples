@@ -760,3 +760,23 @@ b = a[0]
 boxes = [2, 2] #список изложниц с количеством камней
 stones_count = sum(boxes)
 print(stones_count)
+
+#11
+#22
+from typing import List
+
+class MyClass:
+    value: int
+    another_value: str
+    items: List[int]
+
+# Accessing annotations
+for key in MyClass.__annotations__.keys():
+    print(f"Annotation key: {key}")
+    print(f"Annotation value type: {type(MyClass.__annotations__[key])}")
+
+for key in MyClass.__annotations__:
+    print(f"Annotation key: {key}")
+    #print(f"Annotation value type: {type(MyClass.__annotations__[key])}")
+
+print(MyClass.__annotations__)
