@@ -889,6 +889,8 @@ class Parent:
         print(self._a)
 
 class Child(Parent):
+
+
     def child__x(self):
         print(self.__y)
 

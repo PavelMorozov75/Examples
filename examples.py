@@ -555,7 +555,7 @@ print(f2(lst2))
 
 
 
-'''
+
 from functools import reduce #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 data = [{'id': 'a', 'val': 1, 'a': 7}, {'id': 'b', 'val':3, 'a': 9 }, {'id': 'a', 'val':4, 'a': 14}, {'id': 'b', 'val': 8, 'a': 50 }, {'d': 'b', 'val': 8, 'a': 50}  ]
 def f(d, x):
@@ -570,7 +570,7 @@ def f(d, x):
     return d
 print (reduce(f, data, {}))
 #print (list(reduce(f, data, {}).values()))
-'''
+
 
 
 '''
@@ -763,6 +763,7 @@ print(stones_count)
 
 #11
 #22
+'''
 from typing import List
 
 class MyClass:
@@ -780,3 +781,21 @@ for key in MyClass.__annotations__:
     #print(f"Annotation value type: {type(MyClass.__annotations__[key])}")
 
 print(MyClass.__annotations__)
+'''
+
+a = [1, 3]
+
+print(sum(a[:2]))
+
+print('ТеКсТоВое СоОбЩениЕ'.swapcase())
+
+import random, string
+def generate_name(length):
+    all_symbols = string.ascii_letters
+    name = ''.join(random.choice(all_symbols) for _ in range(length))
+    return name
+print(generate_name(5))
+
+from faker import Faker
+f = Faker()
+print(f.ipv4())

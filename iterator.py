@@ -91,7 +91,7 @@ class Mylist(list):
         return(DoubleElementListIterator(self))
 
 
-for pair in Mylist([1,2,2,4]):
+for pair in Mylist([1,2,2,4,5,6]):
     print((pair))
 
 

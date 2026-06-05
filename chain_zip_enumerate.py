@@ -1,6 +1,7 @@
 
 
 from itertools import chain
+'''
 it1 = range(1, 6)
 it2 = range(10, 16)
 rez = chain(it1, it2)
@@ -120,7 +121,7 @@ print(list(res.values()))
 print(*list(res.values()))
 print(chain(*list(res.values())))
 print(list(chain(*list(res.values()))))
-
+'''
 
 a = [1, 2, 3]
 b = ["one", "two", "three", "four", "five"]
